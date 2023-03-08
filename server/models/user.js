@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         f_name: DataTypes.STRING(50),
-        l_namn: DataTypes.STRING(50),
+        l_name: DataTypes.STRING(50),
 
     },
         {underscored: true}

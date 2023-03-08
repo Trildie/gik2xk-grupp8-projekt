@@ -38,34 +38,23 @@ Object.keys(db).forEach(modelName => {
 });
 
 
-/* 
-db.product.hasMany(db.reviews, {
-  allowNull: true,
-  onDelete: "CASCADE"
-});
-db.reviews.belongsTo(product);
 
-db.product.hasMany(db.productImg, {
-  allowNull: false,
-  onDelete: "CASCADE"
-}); */
-/* db.productImg.belongsTo(product);
- */
+db.product.belongsToMany(db.cart, { through: db.cartRow }); //product har många carts
+db.cart.belongsToMany(db.product, { through: db.cartRow });
 
-//db.product.belongsToMany(db.cart, { through: db.cartRow });
-//db.cart.belongsToMany(db.product, { through: db.cartRow });
-db.cart.belongsTo(db.user);
+db.cart.belongsTo(db.user, {foreignKey: {allowNull: false}});
 db.user.hasMany(db.cart, {allowNull: false, onDelete: 'CASCADE'});
 
-db.review.belongsTo(db.user);
+db.review.belongsTo(db.user, {foreignKey: {allowNull: false}});
 db.user.hasMany(db.review, { allowNull: true, onDelete: 'CASCADE' });
 
-db.review.belongsTo(db.product); 
-db.product.hasMany(db.review, { allowNull: true, onDelete: 'CASCADE'});
 
+db.review.belongsTo(db.product, {foreignKey: {allowNull: false}});
+db.product.hasMany(db.review, {allowNull: false, onDelete: 'CASCADE'});
 
-//db.product.hasMany(db.productImg, { allowNull: true, onDelete: 'Cascade' });
-//db.productImg.belongsTo(db.product);
+db.productImg.belongsTo(db.product, {foreignKey: {allowNull: false}});
+db.product.hasMany(db.productImg, {allowNull: false, onDelete: 'CASCADE'});
+
 
 
 
