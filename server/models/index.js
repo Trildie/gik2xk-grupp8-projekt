@@ -42,8 +42,9 @@ Object.keys(db).forEach(modelName => {
 db.product.belongsToMany(db.cart, { through: db.cartRow }); //product har många carts
 db.cart.belongsToMany(db.product, { through: db.cartRow });
 
-db.cart.belongsTo(db.user, {foreignKey: {allowNull: false}});
-db.user.hasMany(db.cart, {allowNull: false, onDelete: 'CASCADE'});
+db.cart.belongsTo(db.user, {
+foreignKey: { allowNull: true}});
+db.user.hasMany(db.cart, {allowNull: false, onDelete:'CASCADE'});
 
 db.review.belongsTo(db.user, {foreignKey: {allowNull: false}});
 db.user.hasMany(db.review, { allowNull: true, onDelete: 'CASCADE' });

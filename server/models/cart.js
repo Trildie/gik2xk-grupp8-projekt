@@ -10,9 +10,6 @@ module.exports = (sequelize, DataTypes) => {
       units: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-          len: [2, 100],
-        },
       },
       total_amount: {
         type: DataTypes.DOUBLE,

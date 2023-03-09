@@ -9,7 +9,30 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/:id", (req, res) => {
+  db.product.findAll().then((result) => {
+    /* res.send("Get product"); */
+    res.send(result);
+  });
+});
+
+
+
 router.post("/", (req, res) => {
+  const product = req.body;
+  db.product.create(product).then((result) => {
+    res.send(result);
+  });
+});
+
+router.post("/:id/addToCart", (req, res) => {
+  const product = req.body;
+  db.product.create(product).then((result) => {
+    res.send(result);
+  });
+});
+
+router.post("/:id/addRaiting", (req, res) => {
   const product = req.body;
   db.product.create(product).then((result) => {
     res.send(result);

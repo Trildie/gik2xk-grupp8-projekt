@@ -39,10 +39,24 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/cart/", (req, res) => {
+  db.user.findAll().then((result) => {
+    /* res.send("Get users"); */
+    res.send(result);
+  });
+});
+
 router.post("/", (req, res) => {
   const user = req.body;
   db.user.create(user).then((result) => {
     res.send(result);
+  });
+});
+
+
+router.delete("/", (req, res) => {
+  db.user.destroy({where: {id: req.body.id }}).then((result) => {
+    res.json(`user raderades`);
   });
 });
 
