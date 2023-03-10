@@ -13,6 +13,7 @@ app.use(cookieParser());
 app.use("/users", require("./routes/usersRoute"));
 app.use('/products', require('./routes/productsRoute'));
 app.use("/carts", require("./routes/cartsRoute"));
+app.use("/productImgs", require("./routes/imgsRoute"));
  
 
 
