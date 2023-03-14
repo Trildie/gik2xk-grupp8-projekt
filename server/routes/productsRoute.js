@@ -1,18 +1,27 @@
 const router = require("express").Router();
 const db = require("../models");
+const productServices = require('../services/productServices');
 //const validate = require("validate.js");
 
 router.get("/", (req, res) => {
-  db.product.findAll().then((result) => {
+  productServices.getAllProducts().then((result) => {
     /* res.send("Get product"); */
-    res.send(result);
+    res.status(result.status).json(result.data);
   });
 });
 
-router.get("/:id", (req, res) => {
-  db.product.findAll().then((result) => {
+//router.get("/:id", (req, res) => {
+ // db.product.findAll().then((result) => {
     /* res.send("Get product"); */
-    res.send(result);
+   // res.send(result);
+  //});
+//});
+
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  productServices.getProductById(id).then((result) => {
+    console.log("test av id via services");
+    res.status(result.status).json(result.data);
   });
 });
 

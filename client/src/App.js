@@ -1,24 +1,20 @@
 import './App.css';
 import { Box, AppBar, Toolbar, Typography, Button, IconButton } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
+
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import HouseIcon from "@mui/icons-material/House";
 
 import { Routes, Route, Link } from 'react-router-dom';
 
-import { createTheme } from '@mui/material/styles';
-import red from '@mui/material/colors/red';
+
+
 import Home from './views/Home';
 import Cart from './views/Cart';
 import Product from './views/Product';
 import ProductDetail from './views/ProductDetail';
 
-const theme = createTheme({
-  palette: {
-    primary: red,
-  },
-});
+
 
 function App() {
   return (

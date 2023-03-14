@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const db = require("../models");
 //const validate = require("validate.js");
+const productServices = require("../services/productServices");
 
 const constraints = {
   email: {
@@ -39,10 +40,19 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/cart/", (req, res) => {
+/* router.get("/cart/", (req, res) => {
   db.user.findAll().then((result) => {
-    /* res.send("Get users"); */
+    res.send("Get users");
     res.send(result);
+  });
+});
+ */
+
+router.get("/carts", (req, res) => {
+  const id = req.params.id;
+
+  productServices.getByUser(id).then((result) => {
+    res.status(result.status).json(result.data);
   });
 });
 
@@ -55,7 +65,7 @@ router.post("/", (req, res) => {
 
 
 router.delete("/", (req, res) => {
-  db.user.destroy({where: {id: req.body.id }}).then((result) => {
+  db.user.destroy({ where: { id: req.body.id } }).then((result) => {
     res.json(`user raderades`);
   });
 });
