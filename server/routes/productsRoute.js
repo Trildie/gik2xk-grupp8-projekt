@@ -32,6 +32,8 @@ router.get("/:id", (req, res) => {
   const product = req.body;
   productServices.createProduct(product).then((result) => {
     
+
+    
     res.status(result.status).json(result.data);
   });
 }); */
@@ -58,7 +60,17 @@ router.post("/:id/addRaiting", (req, res) => {
   });
 });
 
-router.put("/", (req, res) => {
+//check
+router.put("/:id", (req, res)=>{
+  const id = req.params.id;
+  const product = req.body
+  productServices.updateProduct(id, product).then((result) => {
+    res.status(result.status).json(result.data);
+  });
+
+});
+
+/* router.put("/", (req, res) => {
   const product = req.body;
  
   const id = product.id;
@@ -70,13 +82,21 @@ router.put("/", (req, res) => {
         .then((result) => {
             res.send(result);
         });
-    });
+    }); */
 
+//check
 
-router.delete("/", (req, res) => {
+router.delete("/:id", (req, res)=>{
+  const id = req.params.id;
+  productServices.destroyProduct(id).then((result) => {
+    res.status(result.status).json(result.data);
+  });
+
+});
+/* router.delete("/", (req, res) => {
   db.product.destroy({where: {id: req.body.id }}).then((result) => {
     res.json(`Product raderades`);
   });
 });
-
+ */
 module.exports = router;

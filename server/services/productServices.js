@@ -93,6 +93,7 @@ async function getAllProducts() {
   }
 }
 //get all users
+//check
 async function getAllUsers() {
   try {
     const allUsers = await db.user.findAll();
@@ -147,14 +148,15 @@ async function createReview(review) {
   }
 } */
 
-async function updateProduct(product, id) {
-  const invalidData = validate(product, constraints);
+//check
+async function updateProduct(id, product) {
+/*   const invalidData = validate(product, constraints);
   if (!id) {
     return createResponseError(422, "Id is obligatory.");
   }
   if (invalidData) {
     return createResponseError(422, invalidData);
-  }
+  } */
   try {
     const existingProduct = await db.product.findOne({ where: { id } });
     if (!existingProduct) {
@@ -168,7 +170,7 @@ async function updateProduct(product, id) {
   }
 }
 
-async function updateReview(review, id) {
+async function updateReview(id, review) {
   const invalidData = validate(review, constraints);
   if (!id) {
     return createResponseError(422, "Id is obligatory.");
@@ -189,17 +191,18 @@ async function updateReview(review, id) {
   }
 }
 
-async function updateCart(cart, id) {
-  const invalidData = validate(cart, constraints);
+//check!
+async function updateCart(id, cart) {
+ /*  const invalidData = validate(cart, constraints);
   if (!id) {
     return createResponseError(422, "Id is obligatory.");
   }
   if (invalidData) {
     return createResponseError(422, invalidData);
-  }
+  } */
   try {
-    const existingProduct = await db.cart.findOne({ where: { id } });
-    if (!existingProduct) {
+    const existingCart= await db.cart.findOne({ where: { id } });
+    if (!existingCart) {
       return createResponseError(404, "Found no cart to update.");
     }
     //await _addTagToPost(existingProduct, post.tags);
@@ -210,6 +213,7 @@ async function updateCart(cart, id) {
   }
 }
 
+//check
 async function destroyProduct(id) {
   if (!id) {
     return createResponseError(422, "Id is obligatory.");
@@ -221,6 +225,8 @@ async function destroyProduct(id) {
     return createResponseError(error.status, error.message);
   }
 }
+
+//check
 async function destroyUser(id) {
   if (!id) {
     return createResponseError(422, "Id is obligatory.");
@@ -257,6 +263,7 @@ function _formatProduct(product) {
 
   return cleanProduct;
 }
+
 function _formatCart(cart) {
   const cleanCart = {
     id: cart.id,
@@ -291,19 +298,7 @@ function _formatUser(user) {
   return cleanUser;
 }
 
-function _addProduct(product) {
-  const NewProduct = {
-    id: product.id,
-    title: product.title,
-    description: product.description,
-    price: product.price,
-    createdAt: product.createdAt,
-    updatedAt: product.updatedAt,
-   
-  };
 
-  return NewProduct;
-}
 //uppdatera så dessa stämmer ;D gjort!
 module.exports = {
   getProductById,

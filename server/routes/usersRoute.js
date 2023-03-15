@@ -73,7 +73,7 @@ router.get("/:id", (req, res)=>{
   });
 });
 
-
+//check
 router.post("/", (req, res) => {
   const user = req.body;
   db.user.create(user).then((result) => {
@@ -81,11 +81,19 @@ router.post("/", (req, res) => {
   });
 });
 
-
-router.delete("/", (req, res) => {
+//check
+/* router.delete("/", (req, res) => {
   db.user.destroy({ where: { id: req.body.id } }).then((result) => {
     res.json(`user raderades`);
   });
-});
+}); */
 
+
+router.delete("/:id", (req, res)=>{
+  const id = req.params.id;
+  productServices.destroyUser(id).then((result) => {
+    res.status(result.status).json(result.data);
+  });
+
+});
 module.exports = router;
