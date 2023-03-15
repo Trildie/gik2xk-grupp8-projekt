@@ -37,12 +37,9 @@ async function getProductById(productId) {
 //Hämtar cart och dess produkter via user id.
 async function getByUser(userId) {
   try {
-    const cart= await db.cart.findOne({
-      where: {userId },
-      include: [
-        db.user,
-        db.product
-      ],
+    const cart = await db.cart.findOne({
+      where: { userId },
+      include: [db.user, db.product],
     });
     /* return createResponseSuccess(cart); */
     return createResponseSuccess(_formatCart(cart));
@@ -53,8 +50,7 @@ async function getByUser(userId) {
 //get user by id
 async function getByUserID(userId) {
   try {
-    const user = await db.user.findOne({ where: { id: userId }
-        });
+    const user = await db.user.findOne({ where: { id: userId } });
     return createResponseSuccess(user);
   } catch (error) {
     return createResponseError(error.status, error.message);
@@ -66,11 +62,7 @@ async function getById(id) {
   try {
     const cart = await db.cart.findOne({
       where: { id },
-      include: [
-        db.user,
-        db.product
-        
-      ],
+      include: [db.user, db.product],
     });
     return createResponseSuccess(_formatCart(cart));
   } catch (error) {
@@ -132,7 +124,6 @@ async function createReview(review) {
   }
 }
 
-
 /* async function createProduct(product) {
   const invalidData = validate(product, constraints); 
   if (invalidData) {
@@ -150,7 +141,7 @@ async function createReview(review) {
 
 //check
 async function updateProduct(id, product) {
-/*   const invalidData = validate(product, constraints);
+  /*   const invalidData = validate(product, constraints);
   if (!id) {
     return createResponseError(422, "Id is obligatory.");
   }
@@ -179,18 +170,18 @@ async function updateUser(id, user) {
     if (invalidData) {
       return createResponseError(422, invalidData);
     } */
-    try {
-      const existingUser = await db.user.findOne({ where: { id } });
-      if (!existingUser) {
-        return createResponseError(404, "Found no user to update.");
-      }
-      //await _addTagToPost(existingProduct, post.tags);
-      await db.user.update(user, { where: { id } }); //funkar inte dubbelkolla detta
-      return createResponseMessage(200, "user has been updated.");
-    } catch (error) {
-      return createResponseError(error.status, error.message);
+  try {
+    const existingUser = await db.user.findOne({ where: { id } });
+    if (!existingUser) {
+      return createResponseError(404, "Found no user to update.");
     }
+    //await _addTagToPost(existingProduct, post.tags);
+    await db.user.update(user, { where: { id } }); //funkar inte dubbelkolla detta
+    return createResponseMessage(200, "user has been updated.");
+  } catch (error) {
+    return createResponseError(error.status, error.message);
   }
+}
 
 async function updateReview(id, review) {
   const invalidData = validate(review, constraints);
@@ -215,7 +206,7 @@ async function updateReview(id, review) {
 
 //check!
 async function updateCart(id, cart) {
- /*  const invalidData = validate(cart, constraints);
+  /*  const invalidData = validate(cart, constraints);
   if (!id) {
     return createResponseError(422, "Id is obligatory.");
   }
@@ -223,7 +214,7 @@ async function updateCart(id, cart) {
     return createResponseError(422, invalidData);
   } */
   try {
-    const existingCart= await db.cart.findOne({ where: { id } });
+    const existingCart = await db.cart.findOne({ where: { id } });
     if (!existingCart) {
       return createResponseError(404, "Found no cart to update.");
     }
@@ -298,11 +289,8 @@ function _formatCart(cart) {
       email: cart.user.email,
       f_name: cart.user.f_name,
       l_name: cart.user.l_name,
-      
-    }, 
+    },
   };
-  
-  return cleanCart;
 }
 
 function _formatUser(user) {
@@ -312,14 +300,24 @@ function _formatUser(user) {
     f_name: user.f_name,
     l_name: user.l_name,
     createdAt: user.createdAt,
-    updatedAt: user.updatedAt
- 
-   
+    updatedAt: user.updatedAt,
   };
-
+  if (user.review) {
+    cleanUser.reviews = [];
+    user.reviews.map((review) => {
+      return (cleanUser.review = [
+        {
+          id: review.user.product.id,
+          rating: review.rating,
+          summary: review.summary,
+          createdAt: review.createdAt,
+        },
+        ...cleanUser.reviews,
+      ]);
+    });
+  }
   return cleanUser;
 }
-
 
 //uppdatera så dessa stämmer ;D gjort!
 module.exports = {
@@ -338,5 +336,4 @@ module.exports = {
   destroyProduct,
   destroyUser,
   destroyReview,
-  
 };
