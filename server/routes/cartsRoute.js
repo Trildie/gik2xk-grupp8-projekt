@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const db = require("../models");
+const productServices = require('../services/productServices');
 //const validate = require("validate.js");
 
 /* router.get("/", (req, res) => {
@@ -8,15 +9,22 @@ const db = require("../models");
     res.send(result);
   });
 }); */
-
-/* router.get('/:id/posts', (req, res) => {
+/* 
+router.get('/:id/users', (req, res) => {
   const id = req.params.id;
 
-  postService.getByAuthor(id).then((result) => {
+  productServices.getByUser(id).then((result) => {
+    res.status(result.status).json(result.data);
+  });
+}); */
+router.get("/:id", (req, res)=>{
+  const id = req.params.id;
+  productServices.getById(id).then((result) => {
+    console.log("test av id via services");
     res.status(result.status).json(result.data);
   });
 });
- */
+
 router.post("/", (req, res) => {
   const cart = req.body;
   db.cart.create(cart).then((result) => {

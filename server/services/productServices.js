@@ -22,28 +22,54 @@ async function getProductById(productId) {
 
 //Tar imot ett userID, väntar och hittar användaren med det ID.
 //
+/* async function getByUser(userId) {
+  try {
+    const user = await db.user.findOne({ where: { id: userId }});
+    const allCarts= await user.getCarts({include: [
+      db.cart
+      ]});
+    return createResponseSuccess(allCarts.map((cart)=> _formatCart(cart)));
+  } catch (error) {
+    return createResponseError(error.status, error.message);
+  }
+} */
+
+//Hämtar cart och dess produkter via user id.
 async function getByUser(userId) {
   try {
-    const cart = await db.user.findOne({ where: { id: userId },include: [
-        db.cart
-        ]});
-    return createResponseSuccess( _formatCart(cart));
+    const cart= await db.cart.findOne({
+      where: {userId },
+      include: [
+        db.user,
+        db.product
+      ],
+    });
+    /* return createResponseSuccess(cart); */
+    return createResponseSuccess(_formatCart(cart));
+  } catch (error) {
+    return createResponseError(error.status, error.message);
+  }
+}
+//get user by id
+async function getByUserID(userId) {
+  try {
+    const user = await db.user.findOne({ where: { id: userId }
+        });
+    return createResponseSuccess(user);
   } catch (error) {
     return createResponseError(error.status, error.message);
   }
 }
 
+//För cart!  check
 async function getById(id) {
   try {
-    const cart = await db.findOne({
+    const cart = await db.cart.findOne({
       where: { id },
       include: [
         db.user,
-        db.product,
-        {
-          model: db.review,
-          include: [db.user],
-        },
+        db.product
+        
       ],
     });
     return createResponseSuccess(_formatCart(cart));
@@ -53,6 +79,7 @@ async function getById(id) {
 }
 
 //Hämta alla produkter
+//check
 async function getAllProducts() {
   try {
     const allProducts = await db.product.findAll({
@@ -65,7 +92,7 @@ async function getAllProducts() {
     return createResponseError(error.status, error.message);
   }
 }
-
+//get all users
 async function getAllUsers() {
   try {
     const allUsers = await db.user.findAll();
@@ -104,20 +131,21 @@ async function createReview(review) {
   }
 }
 
-async function createProduct() {
-  const invalidData = validate(product, constraints); //fixa en constratins som är för reviews
+
+/* async function createProduct(product) {
+  const invalidData = validate(product, constraints); 
   if (invalidData) {
     return createResponseError(422, invalidData);
   } else {
     try {
-      const newProduct = await db.product.createProduct(product);
+      const newProduct = await db.product.create(product);
       await _addProduct(newProduct);
       return createResponseSuccess(newProduct);
     } catch (error) {
       return createResponseError(error.status, error.message);
     }
   }
-}
+} */
 
 async function updateProduct(product, id) {
   const invalidData = validate(product, constraints);
@@ -233,21 +261,49 @@ function _formatCart(cart) {
   const cleanCart = {
     id: cart.id,
     units: cart.units,
-    totalAmount: cart.totalAmount,
+    total_amount: cart.total_amount,
     createdAt: cart.createdAt,
     updatedAt: cart.updatedAt,
     user: {
       id: cart.user.id,
       email: cart.user.email,
-      fname: cart.user.fname,
-      lname: cart.user.lname,
+      f_name: cart.user.f_name,
+      l_name: cart.user.l_name,
       
-    },
+    }, 
   };
-
+  
   return cleanCart;
 }
 
+function _formatUser(user) {
+  const cleanUser = {
+    id: user.id,
+    email: user.email,
+    f_name: user.f_name,
+    l_name: user.l_name,
+    createdAt: user.createdAt,
+    updatedAt: user.updatedAt
+ 
+   
+  };
+
+  return cleanUser;
+}
+
+function _addProduct(product) {
+  const NewProduct = {
+    id: product.id,
+    title: product.title,
+    description: product.description,
+    price: product.price,
+    createdAt: product.createdAt,
+    updatedAt: product.updatedAt,
+   
+  };
+
+  return NewProduct;
+}
 //uppdatera så dessa stämmer ;D gjort!
 module.exports = {
   getProductById,
@@ -257,11 +313,11 @@ module.exports = {
   getAllUsers,
   addReview,
   createReview,
-  createProduct,
   updateProduct,
   updateReview,
   updateCart,
   destroyProduct,
   destroyUser,
   destroyReview,
+  getByUserID,
 };

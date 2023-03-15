@@ -3,9 +3,9 @@ const db = require("../models");
 const productServices = require('../services/productServices');
 //const validate = require("validate.js");
 
+//check
 router.get("/", (req, res) => {
   productServices.getAllProducts().then((result) => {
-    /* res.send("Get product"); */
     res.status(result.status).json(result.data);
   });
 });
@@ -17,6 +17,7 @@ router.get("/", (req, res) => {
   //});
 //});
 
+//check
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   productServices.getProductById(id).then((result) => {
@@ -26,7 +27,16 @@ router.get("/:id", (req, res) => {
 });
 
 
+//check
+/* router.post("/", (req, res) => {
+  const product = req.body;
+  productServices.createProduct(product).then((result) => {
+    
+    res.status(result.status).json(result.data);
+  });
+}); */
 
+//check skapar product
 router.post("/", (req, res) => {
   const product = req.body;
   db.product.create(product).then((result) => {

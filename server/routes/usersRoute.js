@@ -33,12 +33,19 @@ const constraints = {
   },
 };
 
+//check  get all users
 router.get("/", (req, res) => {
-  db.user.findAll().then((result) => {
-    /* res.send("Get users"); */
-    res.send(result);
+  productServices.getAllUsers().then((result) => {
+    res.status(result.status).json(result.data);
   });
 });
+/* 
+router.get("/", (req, res) => {
+  db.user.findAll().then((result) => {
+
+    res.send(result);
+  });
+}); */
 
 /* router.get("/cart/", (req, res) => {
   db.user.findAll().then((result) => {
@@ -48,13 +55,24 @@ router.get("/", (req, res) => {
 });
  */
 
-router.get("/carts", (req, res) => {
-  const id = req.params.id;
+//check  get carts som tillhör en user
+router.get("/:id/carts", (req, res) => {
+  const  id= req.params.id;
 
   productServices.getByUser(id).then((result) => {
     res.status(result.status).json(result.data);
   });
 });
+
+//check  get en viss users via id
+router.get("/:id", (req, res)=>{
+  const id = req.params.id;
+  productServices.getByUserID(id).then((result) => {
+    console.log("test av id via services");
+    res.status(result.status).json(result.data);
+  });
+});
+
 
 router.post("/", (req, res) => {
   const user = req.body;
