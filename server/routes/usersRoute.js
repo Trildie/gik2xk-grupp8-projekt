@@ -87,6 +87,14 @@ router.post("/", (req, res) => {
     res.json(`user raderades`);
   });
 }); */
+router.put("/:id", (req, res)=>{
+  const id = req.params.id;
+  const user = req.body
+  productServices.updateUser(id, user).then((result) => {
+    res.status(result.status).json(result.data);
+  });
+
+});
 
 
 router.delete("/:id", (req, res)=>{

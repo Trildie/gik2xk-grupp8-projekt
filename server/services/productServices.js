@@ -170,6 +170,28 @@ async function updateProduct(id, product) {
   }
 }
 
+//check
+async function updateUser(id, user) {
+  /*   const invalidData = validate(product, constraints);
+    if (!id) {
+      return createResponseError(422, "Id is obligatory.");
+    }
+    if (invalidData) {
+      return createResponseError(422, invalidData);
+    } */
+    try {
+      const existingUser = await db.user.findOne({ where: { id } });
+      if (!existingUser) {
+        return createResponseError(404, "Found no user to update.");
+      }
+      //await _addTagToPost(existingProduct, post.tags);
+      await db.user.update(user, { where: { id } }); //funkar inte dubbelkolla detta
+      return createResponseMessage(200, "user has been updated.");
+    } catch (error) {
+      return createResponseError(error.status, error.message);
+    }
+  }
+
 async function updateReview(id, review) {
   const invalidData = validate(review, constraints);
   if (!id) {
@@ -302,17 +324,19 @@ function _formatUser(user) {
 //uppdatera så dessa stämmer ;D gjort!
 module.exports = {
   getProductById,
+  getByUserID,
   getByUser,
   getById,
   getAllProducts,
   getAllUsers,
   addReview,
   createReview,
+  updateUser,
   updateProduct,
   updateReview,
   updateCart,
   destroyProduct,
   destroyUser,
   destroyReview,
-  getByUserID,
+  
 };
