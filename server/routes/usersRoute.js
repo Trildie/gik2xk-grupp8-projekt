@@ -96,6 +96,23 @@ router.put("/:id", (req, res)=>{
 
 });
 
+router.put("/:id/review",(req,res)=>{
+  const id = req.params.id;
+  const review = req.body
+  productServices.updateReview(id, review).then((result)=>{
+    res.status(result.status).json(result.data);
+  });
+});
+
+router.delete("/:id/destroyReview", (req, res) => {
+  const rId= req.params.id;
+ 
+  
+  productServices.destroyReview(rId).then((result) => {
+    res.status(result.status).json(result.data);
+  })
+})
+
 
 router.delete("/:id", (req, res)=>{
   const id = req.params.id;

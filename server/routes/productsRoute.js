@@ -53,12 +53,17 @@ router.post("/:id/addToCart", (req, res) => {
   });
 });
 
-router.post("/:id/addRaiting", (req, res) => {
-  const product = req.body;
-  db.product.create(product).then((result) => {
+
+router.post("/:id/createReview", (req, res) => {
+  const prodId = req.params.id;
+  const review = req.body;
+  console.log("test");
+  productServices.addReview(prodId, review).then((result) => {
     res.send(result);
-  });
-});
+  })
+})
+
+
 
 //check
 router.put("/:id", (req, res)=>{

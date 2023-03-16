@@ -11,10 +11,12 @@ const {
 //lägg till hämta kommentar och betyg
 async function getProductById(productId) {
   try {
-    const product = await db.product.findOne({ where: { id: productId } });
+    const products = await db.product.findOne({ where: { id: productId },
+       include: [ db.review, db.productImg] });
     //return createResponseSuccess(_formatProduct(product));
-
-    return createResponseSuccess(product);
+    return createResponseSuccess(
+      _formatProduct(products)
+    );
   } catch (error) {
     return createResponseError(error.status, error.message);
   }
@@ -75,11 +77,9 @@ async function getById(id) {
 async function getAllProducts() {
   try {
     const allProducts = await db.product.findAll({
-      include: [db.review, db.productImg],
+      include: [ db.productImg],
     });
-    return createResponseSuccess(
-      allProducts.map((product) => _formatProduct(product))
-    );
+    return createResponseSuccess(allProducts);
   } catch (error) {
     return createResponseError(error.status, error.message);
   }
@@ -102,27 +102,22 @@ async function addReview(id, review) {
   }
   try {
     review.productId = id;
-    const newReview = await db.review.createReview(review);
+    await db.review.create(review);
+
+    const newReview = await db.product.findOne({
+      where: { id }
+    });
+
     return createResponseSuccess(newReview);
   } catch (error) {
     return createResponseError(error.status, error.message);
   }
 }
 
-async function createReview(review) {
-  const invalidData = validate(review, constraints); //fixa en constratins som är för reviews
-  if (invalidData) {
-    return createResponseError(422, invalidData);
-  } else {
-    try {
-      const newReview = await db.review.createReview(review);
-      await _addReviewToProduct(newReview);
-      return createResponseSuccess(newReview);
-    } catch (error) {
-      return createResponseError(error.status, error.message);
-    }
-  }
-}
+
+
+//används just nu ej
+
 
 /* async function createProduct(product) {
   const invalidData = validate(product, constraints); 
@@ -154,6 +149,7 @@ async function updateProduct(id, product) {
       return createResponseError(404, "Found no product to update.");
     }
     //await _addTagToPost(existingProduct, post.tags);
+    
     await db.product.update(product, { where: { id } }); //funkar inte dubbelkolla detta
     return createResponseMessage(200, "Product has been updated.");
   } catch (error) {
@@ -184,13 +180,13 @@ async function updateUser(id, user) {
 }
 
 async function updateReview(id, review) {
-  const invalidData = validate(review, constraints);
+ /*  const invalidData = validate(review, constraints);
   if (!id) {
     return createResponseError(422, "Id is obligatory.");
   }
   if (invalidData) {
     return createResponseError(422, invalidData);
-  }
+  } */
   try {
     const existingProduct = await db.review.findOne({ where: { id } });
     if (!existingProduct) {
@@ -219,12 +215,17 @@ async function updateCart(id, cart) {
       return createResponseError(404, "Found no cart to update.");
     }
     //await _addTagToPost(existingProduct, post.tags);
+    await _addProductToCart(existingCart, cart.products);
     await db.cart.update(cart, { where: { id } }); //funkar inte dubbelkolla detta
+    
+ 
     return createResponseMessage(200, "Cart has been updated.");
   } catch (error) {
     return createResponseError(error.status, error.message);
   }
 }
+
+
 
 //check
 async function destroyProduct(id) {
@@ -254,7 +255,7 @@ async function destroyUser(id) {
 
 async function destroyReview(id) {
   if (!id) {
-    return createResponseError(422, "Id is obligatory.");
+    return createResponseError(422, "Id does not exist.");
   }
   try {
     await db.review.destroy({ where: { id } });
@@ -273,6 +274,21 @@ function _formatProduct(product) {
     createdAt: product.createdAt,
     updatedAt: product.updatedAt,
   };
+  if (product.reviews) {
+    cleanProduct.reviews = [];
+    product.reviews.map((review) => {
+      return (cleanProduct.reviews = [
+        {
+          id: review.id,
+          rating: review.rating,
+          summary: review.summary,
+          userId: review.userId,
+          createdAt: review.createdAt,
+        },
+        ...cleanProduct.reviews
+      ]);
+    });
+  }
 
   return cleanProduct;
 }
@@ -289,9 +305,24 @@ function _formatCart(cart) {
       email: cart.user.email,
       f_name: cart.user.f_name,
       l_name: cart.user.l_name,
-    },
+    }, products: []
+  /*   product:{
+      productId: product.id,
+      title: cart.product.title,
+      description: cart.product.description,
+      price: cart.product.price
+
+    } */
   };
+  if (cart.products) {
+    cart.products.map((product) => {
+      return (cleanCart.products = [product.title, ...cleanCart.products]);
+    });
+    return cleanCart;
+  }
 }
+  
+
 
 function _formatUser(user) {
   const cleanUser = {
@@ -319,6 +350,24 @@ function _formatUser(user) {
   return cleanUser;
 }
 
+async function _addProductToCart(cart, product) {
+  await db.cartRow.destroy({ where: { cartId: cart.id } });
+
+  if (product) {
+    products.forEach(async (product) => {
+      const productId = await _findOrCreateproductId(product);
+      await cart.addProduct(productId);
+    });
+  }
+}
+
+async function _findOrCreateproductId(title) {
+ 
+  const foundOrCreatedProduct = await db.product.findOrCreate({ where: { title} });
+
+  return foundOrCreatedProduct[0].id;
+}
+
 //uppdatera så dessa stämmer ;D gjort!
 module.exports = {
   getProductById,
@@ -328,7 +377,6 @@ module.exports = {
   getAllProducts,
   getAllUsers,
   addReview,
-  createReview,
   updateUser,
   updateProduct,
   updateReview,
