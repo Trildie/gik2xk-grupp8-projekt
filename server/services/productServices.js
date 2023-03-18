@@ -114,7 +114,22 @@ async function addReview(id, review) {
   }
 }
 
+async function create(cart) {
+/*   const invalidData = validate(post, constraints);
+  if (invalidData) {
+    return createResponseError(422, invalidData);
+  } */
+  try {
+    const newCart = await db.cart.create(cart);
+    //post tags är en array av namn
+    //lägg till eventuella taggar
+    await _addProductToCart(newCart, cart.products);
 
+    return createResponseSuccess(newCart);
+  } catch (error) {
+    return createResponseError(error.status, error.message);
+  }
+}
 
 //används just nu ej
 
@@ -316,7 +331,7 @@ function _formatCart(cart) {
   };
   if (cart.products) {
     cart.products.map((product) => {
-      return (cleanCart.products = [product.title, ...cleanCart.products]);
+      return (cleanCart.products = [product.title, product.price, ...cleanCart.products]);
     });
     return cleanCart;
   }
@@ -349,11 +364,17 @@ function _formatUser(user) {
   }
   return cleanUser;
 }
+async function _findOrCreateproductId(title) {
+ 
+  const foundOrCreatedProduct = await db.product.findOrCreate({ where: { title} });
 
-async function _addProductToCart(cart, product) {
+  return foundOrCreatedProduct[0].id;
+}
+
+async function _addProductToCart(cart, products) {
   await db.cartRow.destroy({ where: { cartId: cart.id } });
 
-  if (product) {
+  if (products) {
     products.forEach(async (product) => {
       const productId = await _findOrCreateproductId(product);
       await cart.addProduct(productId);
@@ -361,12 +382,6 @@ async function _addProductToCart(cart, product) {
   }
 }
 
-async function _findOrCreateproductId(title) {
- 
-  const foundOrCreatedProduct = await db.product.findOrCreate({ where: { title} });
-
-  return foundOrCreatedProduct[0].id;
-}
 
 //uppdatera så dessa stämmer ;D gjort!
 module.exports = {
@@ -376,6 +391,7 @@ module.exports = {
   getById,
   getAllProducts,
   getAllUsers,
+  create,
   addReview,
   updateUser,
   updateProduct,

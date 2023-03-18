@@ -3,13 +3,13 @@ const db = require("../models");
 const productServices = require('../services/productServices');
 //const validate = require("validate.js");
 
-/* router.get("/", (req, res) => {
+/*  router.get("/", (req, res) => {
   db.cart.findAll().then((result) => {
     res.send("Get product");
     res.send(result);
   });
 }); */
-/* 
+/*  
 router.get('/', (req, res) => {
   const id = req.params.id;
 
@@ -26,16 +26,23 @@ router.get("/:id", (req, res)=>{
   });
 });
 
-
+/* 
 router.post("/", (req, res) => {
   const cart = req.body;
   db.cart.create(cart).then((result) => {
     res.send(result);
   });
-});
+}); */
 
+
+router.post('/', (req, res) => {
+  const cart = req.body;
+  productServices.create(cart).then((result) => {
+    res.status(result.status).json(result.data);
+  });
+});
 //check
-/* router.put("/", (req, res) => {
+router.put("/", (req, res) => {
   const cart = req.body;
   const id = cart.id;
   db.cart
@@ -45,7 +52,7 @@ router.post("/", (req, res) => {
     .then((result) => {
       res.send(result);
     });
-}); */
+});
 
 router.put("/:id", (req, res)=>{
   const id = req.params.id;
@@ -59,8 +66,9 @@ router.put("/:id", (req, res)=>{
 
 
 //check
-router.delete("/", (req, res) => {
-  db.cart.destroy({ where: { id: req.body.id } }).then((result) => {
+router.delete("/:id", (req, res) => {
+  const id=req.params.id
+  db.cart.destroy({ where: { id} }).then((result) => {
     res.json(`cart raderades`);
   });
 });
