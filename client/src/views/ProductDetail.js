@@ -3,9 +3,10 @@ import Review from "../components/Review";
 import ReviewForm from "../components/ReviewForm";
 import {Box, Grid, Typography} from "@mui/material";
 import "./ProductDetail.css"
+import { useParams } from "react-router-dom";
 
 function ProductDetail() {
-
+    const params = useParams();
     const product = [
         {
           id: 1,

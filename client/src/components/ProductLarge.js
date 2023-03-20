@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+import { Link } from 'react-router-dom';
 
 function ProductLarge({product}) {
 /*   const product = [
@@ -30,7 +31,7 @@ function ProductLarge({product}) {
 
               <div>
                 <Typography variant="h5" component="h3">
-                  {product.title}
+                  <Link to={`/productDetails/${product.id}`}> {product.title} </Link> 
                 </Typography>
                 <Typography> {product.description}</Typography>
                 <br />

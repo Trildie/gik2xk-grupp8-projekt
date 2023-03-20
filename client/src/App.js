@@ -13,6 +13,7 @@ import Home from './views/Home';
 import Cart from './views/Cart';
 import Product from './views/Product';
 import ProductDetail from './views/ProductDetail';
+import ProductEdit from './views/ProductEdit';
 
 
 
@@ -38,12 +39,12 @@ function App() {
 
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <SportsEsportsIcon />
-              <Link to="/product">Games</Link>
+              <Link to="/products">Games</Link>
               <SportsEsportsIcon />
             </Typography>
 
             <Typography variant="h6" component="div" sx={{ flexGrow: 0 }}>
-              <Link to="/productDetail">Product Detal</Link>
+              <Link to="/productDetail">Product Detail</Link>
               <SportsEsportsIcon />
             </Typography>
 
@@ -60,15 +61,14 @@ function App() {
 
       <div>
         <Routes>
-          <Route path="/" element={<Home></Home>}>
-            {" "}
-          </Route>
-          <Route path="/cart" element={<Cart></Cart>}></Route>
-          <Route path="/product" element={<Product></Product>}></Route>
-          <Route
-            path="/productDetail"
-            element={<ProductDetail></ProductDetail>}
-          ></Route>
+          <Route exact path="/" element={<Home></Home>}> </Route>
+          <Route exact path="/cart" element={<Cart></Cart>}></Route>
+          <Route exact path="/products" element={<Product></Product>}></Route>
+          <Route exact path="/productDetail" element={<ProductDetail/>} ></Route>
+          <Route exact path="/productDetail/:id" element={<ProductDetail/>} ></Route>
+          <Route exact path="/productDetail/new" element={<ProductDetail/>} ></Route>
+          <Route exact path="/productDetail/:id/edit" element={<ProductEdit/>} ></Route>
+          <Route exact path="/productEdit" element={<ProductEdit/>} ></Route>
         </Routes>
       </div>
     </div>

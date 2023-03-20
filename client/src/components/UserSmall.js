@@ -4,7 +4,6 @@ function UserSmall({user}) {
     return (
         <>
             <Typography>User: {user.fName} </Typography>
-            <Typography>Id: {user.userId} </Typography>
         </>
         
     );

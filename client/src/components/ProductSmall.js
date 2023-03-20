@@ -1,4 +1,7 @@
 import { Typography } from "@mui/material";
+import { Link } from 'react-router-dom';
+
+
 
 function ProductSmall({product}) {
   return (
@@ -9,7 +12,7 @@ function ProductSmall({product}) {
 
       <div>
         <Typography variant="h5" component="h3">
-          {product.title}
+          <Link to={`/productDetail/${product.id}`}>{product.title}</Link>
         </Typography>
         <Typography> {product.description}</Typography>
         <Typography variant="h5" component="h3">
