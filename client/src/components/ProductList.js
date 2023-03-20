@@ -3,12 +3,12 @@ import ProductSmall from "./ProductSmall";
 import{ getAllProducts } from '../models/productModel'
 import { useEffect, useState } from "react";
 
-function ProductList() {
+function ProductList({pathname}) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    getAllProducts().then(products => setProducts(products));
-   }, []);
+    getAllProducts(pathname).then(products => setProducts(products));
+   }, [pathname]);
 
   return (
     <ul>

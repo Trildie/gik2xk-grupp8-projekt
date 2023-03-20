@@ -1,5 +1,8 @@
-import { Typography } from "@mui/material";
+
 import { Link } from 'react-router-dom';
+import {
+  Typography
+} from '@mui/material';
 
 
 
@@ -7,7 +10,7 @@ function ProductSmall({product}) {
   return (
     <>
       <div>
-        <img heigh="200" width="500" src={product.productImg.imgUrl} alt="NEJ"/>
+        <img heigh="200" width="500" src={product.productImg.imgUrl} alt="cover image for the game"/>
       </div>
 
       <div>
@@ -20,6 +23,7 @@ function ProductSmall({product}) {
         </Typography>
       </div>
     </>
+   
   );
 }
 

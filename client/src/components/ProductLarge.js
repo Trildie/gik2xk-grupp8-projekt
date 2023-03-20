@@ -25,7 +25,7 @@ function ProductLarge({product}) {
           return (
             <li>
               <div>
-                <img heigh="200" width="500" src={product.productImg.imgUrl} alt="NEJ"/>
+                <img heigh="200" width="500" src={product.productImg.imgUrl} alt="bild på spel"/>
                 
               </div>
 
