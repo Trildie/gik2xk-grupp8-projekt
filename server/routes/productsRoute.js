@@ -1,7 +1,17 @@
 const router = require("express").Router();
 const db = require("../models");
 const productServices = require('../services/productServices');
-//const validate = require("validate.js");
+const validate = require("validate.js");
+
+const constraints = {
+ 
+  
+  productImg: {
+    url: {
+      message: '^Sökvägen är felaktig.'
+    }
+  }
+};
 
 //check
 router.get("/", (req, res) => {
@@ -41,9 +51,14 @@ router.get("/:id", (req, res) => {
 //check skapar product
 router.post("/", (req, res) => {
   const product = req.body;
-  db.product.create(product).then((result) => {
-    res.send(result);
-  });
+  const invalidData = validate(product, constraints);
+  if (invalidData) {
+    res.status(400).json(invalidData);
+  } else {
+    db.product.create(product).then((result) => {
+      res.send(result);
+    });
+  }
 });
 
 router.post("/:id/addToCart", (req, res) => {

@@ -11,7 +11,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 
 import Home from './views/Home';
 import Cart from './views/Cart';
-import Product from './views/Product';
+import Products from './views/Products';
 import ProductDetail from './views/ProductDetail';
 import ProductEdit from './views/ProductEdit';
 
@@ -63,7 +63,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home></Home>}> </Route>
           <Route exact path="/cart" element={<Cart></Cart>}></Route>
-          <Route exact path="/products" element={<Product></Product>}></Route>
+          <Route exact path="/products" element={<Products></Products>}></Route>
           <Route exact path="/productDetail" element={<ProductDetail/>} ></Route>
           <Route exact path="/productDetail/:id" element={<ProductDetail/>} ></Route>
           <Route exact path="/productDetail/new" element={<ProductDetail/>} ></Route>

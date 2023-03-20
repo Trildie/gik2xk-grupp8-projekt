@@ -9,10 +9,10 @@ import {
 function ProductSmall({product}) {
   return (
     <>
-      <div>
-        <img heigh="200" width="500" src={product.productImg.imgUrl} alt="cover image for the game"/>
+    {   <div>
+        <img heigh="200" width="500" src={product.productImg} alt="cover for the game"/>
       </div>
-
+ }
       <div>
         <Typography variant="h5" component="h3">
           <Link to={`/productDetail/${product.id}`}>{product.title}</Link>

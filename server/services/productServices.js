@@ -12,7 +12,7 @@ const {
 async function getProductById(productId) {
   try {
     const products = await db.product.findOne({ where: { id: productId },
-       include: [ db.review, db.productImg] });
+       include: [ db.review] });
     //return createResponseSuccess(_formatProduct(product));
     return createResponseSuccess(
       _formatProduct(products)
@@ -77,7 +77,6 @@ async function getById(id) {
 async function getAllProducts() {
   try {
     const allProducts = await db.product.findAll({
-      include: [ db.productImg],
     });
     return createResponseSuccess(allProducts);
   } catch (error) {
@@ -286,6 +285,7 @@ function _formatProduct(product) {
     title: product.title,
     description: product.description,
     price: product.price,
+    productImg: product.productImg,
     createdAt: product.createdAt,
     updatedAt: product.updatedAt,
   };

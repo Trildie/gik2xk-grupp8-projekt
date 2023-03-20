@@ -1,17 +1,21 @@
 import ProductList from "../components/ProductList";
 import { Box, Grid, Typography } from "@mui/material";
-import "./Product.css"
-
+import { useLocation } from 'react-router-dom';
+import "./Products.css"
+import { Container } from '@mui/material';
 //p är padding
 
-function Product({ product }) {
+function Products() {
+  const location = useLocation();
+    console.log(location);
   return (
+    /* 
     <Grid container columnSpacing={2} p={1} className="ProdMenu">
 
       <Grid className="Product__grid-item" item xs={12} md={4}>
         <Box className="Product__grid-item-content">
           <Typography variant="h4" component="h2">Product</Typography>
-          <ProductList></ProductList>
+          <ProductList pathname={location.pathname}></ProductList>
         </Box>
       </Grid>
 
@@ -23,8 +27,14 @@ function Product({ product }) {
         <h2>test</h2>
       </Grid>
 
-    </Grid>
+    </Grid> */
+
+  
+    <Container maxWidth="md">
+      <ProductList pathname={location.pathname} />
+    </Container>
   );
+  
 }
 
-export default Product;
+export default Products;

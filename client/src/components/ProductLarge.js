@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { Link } from 'react-router-dom';
 
-function ProductLarge({product}) {
+function ProductLarge({products}) {
 /*   const product = [
     {
       id: 1,
@@ -20,10 +20,10 @@ function ProductLarge({product}) {
 
   return (
     <ul>
-      {product &&
-        product.map((product) => {
+      {products &&
+        products.map((product) => {
           return (
-            <li>
+            <li key={`productId_${product.id}`}>
               <div>
                 <img heigh="200" width="500" src={product.productImg.imgUrl} alt="bild på spel"/>
                 

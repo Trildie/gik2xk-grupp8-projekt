@@ -56,8 +56,7 @@ db.user.hasMany(db.review, { allowNull: true, OnDelete: "CASCADE" });
 db.review.belongsTo(db.product, { foreignKey: { allowNull: false } });
 db.product.hasMany(db.review, { allowNull: false, OnDelete: "CASCADE" });
 
-db.productImg.belongsTo(db.product, { foreignKey: { allowNull: false } });
-db.product.hasMany(db.productImg, { allowNull: false, OnDelete: "CASCADE" });
+
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

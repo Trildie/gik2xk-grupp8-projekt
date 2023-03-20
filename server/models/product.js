@@ -21,7 +21,15 @@ module.exports = (sequelize, DataTypes) => {
         price: {
           type: DataTypes.DOUBLE,
           allowNull: false,
+        },
+        productImg:{
+          type: DataTypes.STRING(255),
+          validate: {
+            isUrl: true
+          }
+      
         }
+
       },
       { underscored: true }
     );
