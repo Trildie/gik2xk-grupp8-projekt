@@ -40,10 +40,6 @@ function ProductEdit() {
             <TextField name="description" label="description" fullWidth multiline minRows={7}> </TextField>
             <TextField name="price" label="price" fullWidth> </TextField>
             <TextField name="imgUrl" label="imgUrl" fullWidth> </TextField>
-
-            <Link to={`/products/${productId}/edit`}>
-                <Button variant="contained" color="primary">Edit</Button>
-            </Link>
             
             <Button variant="contained" color="primary" startIcon={<SaveIcon />} >Spara</Button>
         </form>

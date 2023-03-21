@@ -1,9 +1,9 @@
 import { Typography } from "@mui/material";
 
-function UserSmall({user}) {
+function UserSmall(userId) {
     return (
         <>
-            <Typography>User: {user.fName} </Typography>
+            <Typography>User: {userId} </Typography>
         </>
         
     );

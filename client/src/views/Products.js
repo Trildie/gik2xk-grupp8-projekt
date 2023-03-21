@@ -3,11 +3,11 @@ import { Box, Grid, Typography } from "@mui/material";
 import { useLocation } from 'react-router-dom';
 import "./Products.css"
 import { Container } from '@mui/material';
+import ProductLarge from "../components/ProductLarge";
 //p är padding
 
 function Products() {
   const location = useLocation();
-    console.log(location);
   return (
     /* 
     <Grid container columnSpacing={2} p={1} className="ProdMenu">
@@ -31,6 +31,7 @@ function Products() {
 
   
     <Container maxWidth="md">
+      
       <ProductList pathname={location.pathname} />
     </Container>
   );

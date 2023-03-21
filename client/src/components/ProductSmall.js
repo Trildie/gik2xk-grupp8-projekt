@@ -19,7 +19,7 @@ function ProductSmall({product}) {
         </Typography>
         <Typography> {product.description}</Typography>
         <Typography variant="h5" component="h3">
-          Price: {product.price}$
+          Price: {product.price}kr
         </Typography>
       </div>
     </>

@@ -68,7 +68,7 @@ function App() {
           <Route exact path="/productDetail/:id" element={<ProductDetail/>} ></Route>
           <Route exact path="/productDetail/new" element={<ProductDetail/>} ></Route>
           <Route exact path="/productDetail/:id/edit" element={<ProductEdit/>} ></Route>
-          <Route exact path="/productEdit" element={<ProductEdit/>} ></Route>
+          <Route exact path="/productEdit/:id" element={<ProductEdit/>} ></Route>
         </Routes>
       </div>
     </div>

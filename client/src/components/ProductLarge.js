@@ -1,48 +1,53 @@
 import { Typography } from "@mui/material";
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { getProductsById } from "../models/productModel";
 
-function ProductLarge({products}) {
-/*   const product = [
-    {
-      id: 1,
-      title: "Monsterhunter World ",
-      description:
-        "Welcome to a new world! Take on the role of a hunter and slay ferocious monsters in a living, breathing ecosystem where you can use the landscape and its diverse inhabitants to get the upper hand.Hunt alone or in co- op with up to three other players, and use materials collected from fallen foes to craft new gear and take on even bigger, badder beasts!",
-      price: 300,
-      createdAt: "2023-03-14T11:54:38.000z",
-      updatedAt: "2023-03-14T11:54:38.000z",
-      productImg: {
-        imgUrl: 'https://image.api.playstation.com/vulcan/img/cfn/11307lWuUhMIK8lvklGLsefZ-ctNgO7fyYGha3AJD3P6cdPMDmAJhJldENfuLZLb_bggUXULYyNwXUeRf6hdo9mda98yhaPU.png'
-         
-      }
-    },
-  ]; */
+function ProductLarge({ product }) {
+  /*     console.log("HEJ");
+    const [products, setProducts] = useState([]);
+    console.log(products);
+    useEffect(() => {
+      getProductsById(pathname).then((products) => setProducts(products));
+    }, [pathname]);
+    console.log(products);
+ */
+  return product ? (
+    <>
+      <ul>
+        <li key={`productId_${product.id}`}>
+          <div>
+            <img
+              heigh="200"
+              width="500"
+              src={product.productImg}
+              alt="bild på spel"
+            />
+          </div>
 
-  return (
-    <ul>
-      {products &&
-        products.map((product) => {
-          return (
-            <li key={`productId_${product.id}`}>
-              <div>
-                <img heigh="200" width="500" src={product.productImg.imgUrl} alt="bild på spel"/>
-                
-              </div>
-
-              <div>
-                <Typography variant="h5" component="h3">
-                  <Link to={`/productDetails/${product.id}`}> {product.title} </Link> 
-                </Typography>
-                <Typography> {product.description}</Typography>
-                <br />
-                <Typography variant="h5" component="h3">
-                Price: {product.price}$
-                </Typography>
-              </div>
-            </li>
-          );
-        })}
-    </ul>
+          <div>
+            <Typography variant="h5" component="h3">
+              {
+                <Link to={`/productDetail/${product.id}`}>
+                  {" "}
+                  {product.title}{" "}
+                </Link>
+              }
+            </Typography>
+            <Typography> {product.description}</Typography>
+            <br />
+            <Typography variant="h5" component="h3">
+              Price: {product.price}$
+            </Typography>
+          </div>
+        </li>
+      </ul>
+      <Typography variant="h5" component="h3">
+        {<Link to={`/productEdit/${product.id}`}> {"Edit product"} </Link>}
+      </Typography>
+    </>
+  ) : (
+    <Typography>Product is missing</Typography>
   );
 }
 
