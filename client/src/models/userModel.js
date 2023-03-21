@@ -20,3 +20,13 @@ export async function getByUserID(id) {
     return [];
   }
 }
+export async function create(user) {
+  const result = await api.post("/users/", user);
+
+  if (result.status === 200) return result.data;
+  else {
+    console.log(result.status);
+    console.log(result.data);
+    return {};
+  }
+}

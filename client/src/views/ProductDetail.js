@@ -5,16 +5,22 @@ import { Box, Grid, Rating, Typography } from "@mui/material";
 import "./ProductDetail.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getProductsById } from "../models/productModel";
+import { addReview, getProductsById } from "../models/productModel";
 
 function ProductDetail() {
   const params = useParams();
   const productId = params.id;
+    
+ 
 
   const [product, setProduct] = useState({});
   useEffect(() => {
     getProductsById(productId).then((product) => setProduct(product));
   }, [productId]);
+  function onReviewAdd(review) {
+     console.log(review)
+     addReview(productId, review).then((product) => setProduct(product));
+   }
 
   return (
     <Grid container columnSpacing={2} className="ProductDetail">
@@ -34,8 +40,10 @@ function ProductDetail() {
           <Typography variant="h4" component="h2">
             ReviewForm
           </Typography>
-          <ReviewForm></ReviewForm>
+          <ReviewForm onSave={onReviewAdd}></ReviewForm>
+          
         </Box>
+      
 
         <Box
           className="ProductDetails__grid-item__content"

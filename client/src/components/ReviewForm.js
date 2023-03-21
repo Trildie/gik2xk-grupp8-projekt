@@ -1,10 +1,21 @@
-import { Button, Rating, TextField } from "@mui/material";
+import { Alert, Button, Rating, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import SaveIcon from "@mui/icons-material/Save";
 import { useState } from "react";
+/* import { create } from "../models/productModel"; */
+import { addReview } from "../models/productModel";
 
-function ReviewForm(onSave) {
-  const [review, setReview] = useState({ summary: "", rating: (0)});
+  
+/*   function onSave() {
+    if (product.id === 0) {
+      create
+    } */
+    
+
+function ReviewForm({onSave}) {
+  const [review, setReview] = useState({ summary: "", rating: 0 });
+  const [alertOpen, setAlertOpen] = useState(false);
+
 
   return (
     <form>
@@ -25,18 +36,33 @@ function ReviewForm(onSave) {
         onChange={(e) =>
           setReview({
             ...review,
-            rating: parseFloat(e.target.value)
+            rating: parseFloat(e.target.value),
           })
         }
       />
-
-      <Link to={`/products/${1}/createReview`}>
-        <Button variant="contained" color="primary" startIcon={<SaveIcon />}>
-          Spara
-        </Button>
-      </Link>
+      <Button
+        startIcon={<SaveIcon />}
+        onClick={() => onSave({ ...review, userId: 1 })}
+        variant="contained"
+        color="primary"
+      >
+        Spara
+      </Button>
     </form>
   );
 }
 
 export default ReviewForm;
+
+//
+
+{
+  /* <Button
+        startIcon={<SaveIcon />}
+        onClick={() => (onSave = { onReviewAdd })}
+        variant="contained"
+        color="primary"
+      >
+        Spara
+      </Button>*/
+}

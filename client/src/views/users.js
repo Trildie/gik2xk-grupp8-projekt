@@ -1,34 +1,78 @@
 import UserList from "../components/UserList";
-import { Box, Grid, Typography } from "@mui/material";
-import { useLocation } from 'react-router-dom';
+import {Alert, Typography, TextField, Button } from "@mui/material";
+import {  useLocation } from 'react-router-dom';
+import { useState } from "react";
+import SaveIcon from "@mui/icons-material/Save";
 
 
-//p är padding
+import { create } from "../models/userModel";
+
+
+
+
+
 
 function Users() {
-  const location = useLocation();
-    console.log(location);
+
+  const [user, setUser] = useState({ fname: "", lname: "", email: "" });
+  const [alertOpen, setAlertOpen] = useState(false);
+
+
+
+ function onSave() {
+   if (user.id ===0) {
+     create({ ...user }).then(() => setAlertOpen(true));
+   } else {
+    console.log("user already exists")
+    create({ ...user }).then(() => setAlertOpen(true));
+   }
+ }
+
   return (
-    
-    <Grid container columnSpacing={2} p={1} className="ProdMenu">
+    <>
+      <form>
+        <TextField
+          name="fname"
+          label="First Name"
+          fullWidth
+          multiline
+          minRows={5}
+          value={user.fname}
+          onChange={(e) => setUser({ ...user, fname: e.target.value })}
+        ></TextField>
 
-      <Grid className="User__grid-item" item xs={12} md={4}>
-        <Box className="User__grid-item-content">
-          <Typography variant="h4" component="h2">User</Typography>
-          <UserList pathname={location.pathname}></UserList>
-        </Box>
-      </Grid>
+        <TextField
+          name="lname"
+          label="Last Name"
+          fullWidth
+          multiline
+          minRows={5}
+          value={user.lname}
+          onChange={(e) => setUser({ ...user, lname: e.target.value })}
+        ></TextField>
 
-      <Grid className="User__grid-item" item xs={12} md={4}>
-        <h2>test</h2>
-      </Grid>
+        <TextField
+          name="email"
+          label="email"
+          fullWidth
+          multiline
+          minRows={5}
+          value={user.email}
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
+        ></TextField>
 
-      <Grid className="User__grid-item" item xs={12} md={4}>
-        <h2>test</h2>
-      </Grid>
-
-    </Grid>
+        <Button
+          startIcon={<SaveIcon />}
+          variant="contained"
+          color="primary"
+          onClick={() => onSave({ ...user })}
+        >
+          Spara
+        </Button>
+      </form>
+      
+    </>
   );
-}
+} 
 
 export default Users;
