@@ -1,7 +1,9 @@
-import { Typography } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getProductsById } from "../models/productModel";
+import { getProductsById, addProductToCart } from "../models/productModel";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import TextField from '@mui/material/TextField';
 
 function ProductLarge({ product }) {
   /*     console.log("HEJ");
@@ -12,6 +14,10 @@ function ProductLarge({ product }) {
     }, [pathname]);
     console.log(products);
  */
+    
+    const [ammount, setAmmount] = useState({productUnits: "", ammount:0});
+    const userId = 3;
+
   return product ? (
     <>
       <ul>
@@ -37,8 +43,41 @@ function ProductLarge({ product }) {
             <Typography> {product.description}</Typography>
             <br />
             <Typography variant="h5" component="h3">
-              Price: {product.price}$
+              Price: {product.price}kr
             </Typography>
+
+
+            <Typography variant="h5" component="h3">
+              
+              <Button
+              size="large"
+              startIcon={<AddShoppingCartIcon />}
+              onClick={() => addProductToCart({ product, userId , ammount})}
+              variant="contained"
+              color="primary"
+              key={``}
+              >
+              Add to cart
+              </Button>
+
+              <TextField
+              name="productUnits"
+              size="small"
+              id="outlined-number"
+                label=""
+                InputProps={{ inputProps: { min: 0} }}
+              type="number"
+              value={ammount.productUnits}
+              onChange={(e) => setAmmount({ ammount, productUnits: e.target.value })}
+              InputLabelProps={{
+                shrink: true,
+              }}/>
+
+            </Typography>
+
+            
+
+
           </div>
         </li>
       </ul>

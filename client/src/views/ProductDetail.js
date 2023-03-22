@@ -1,25 +1,30 @@
 import ProductLarge from "../components/ProductLarge";
-import Review from "../components/Review";
+import ReviewList from "../components/ReviewList";
 import ReviewForm from "../components/ReviewForm";
 import { Box, Grid, Rating, Typography } from "@mui/material";
 import "./ProductDetail.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { addReview, getProductsById } from "../models/productModel";
 
 function ProductDetail() {
   const params = useParams();
   const productId = params.id;
-    
+  const navigate = useNavigate;
  
 
   const [product, setProduct] = useState({});
   useEffect(() => {
     getProductsById(productId).then((product) => setProduct(product));
   }, [productId]);
+  
   function onReviewAdd(review) {
      console.log(review)
-     addReview(productId, review).then((product) => setProduct(product));
+    addReview(productId, review).then((product) => {
+      setProduct(product);
+      window.location.reload(); 
+    });
+     
    }
 
   return (
@@ -40,7 +45,7 @@ function ProductDetail() {
           <Typography variant="h4" component="h2">
             ReviewForm
           </Typography>
-          <ReviewForm onSave={onReviewAdd}></ReviewForm>
+          <ReviewForm onSave={onReviewAdd} ></ReviewForm>
           
         </Box>
       
@@ -60,10 +65,11 @@ function ProductDetail() {
             />
           </Typography>
 
-          <Review reviews={product.reviews} />
+          {product.reviews && <ReviewList reviews={product.reviews}></ReviewList >}
         </Box>
+        </Grid>
       </Grid>
-    </Grid>
+    
   );
 }
 

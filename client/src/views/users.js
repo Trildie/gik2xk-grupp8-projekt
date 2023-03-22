@@ -1,78 +1,55 @@
-import UserList from "../components/UserList";
-import {Alert, Typography, TextField, Button } from "@mui/material";
-import {  useLocation } from 'react-router-dom';
-import { useState } from "react";
-import SaveIcon from "@mui/icons-material/Save";
+import { Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+
+import { Link, useParams } from "react-router-dom";
+import ReviewList from "../components/ReviewList";
+import { getByUserID } from "../models/userModel";
 
 
-import { create } from "../models/userModel";
+function Users({ pathname }) {
+  const params= useParams;
+  const [user, setUser] = useState([]);
+   const userId = 3;
+
+  
+  useEffect(() => {
+    getByUserID(userId).then((user) => setUser(user));
+  }, [userId]);
+
+   
+  
+  return user ? (
+ <>
+       <ul>
+          <li key={`userId_${user.id}`}></li>
+        <div>
+          
+            <Typography variant="h5" component="h3">
+             
+             
+            </Typography>
+            <Typography variant="h5" component="h3"> First Name: {user.f_name}</Typography>
+            <br />
+            <Typography variant="h5" component="h3">
+             Last Name: {user.l_name}
+            </Typography>
 
 
 
 
 
 
-function Users() {
-
-  const [user, setUser] = useState({ fname: "", lname: "", email: "" });
-  const [alertOpen, setAlertOpen] = useState(false);
-
-
-
- function onSave() {
-   if (user.id ===0) {
-     create({ ...user }).then(() => setAlertOpen(true));
-   } else {
-    console.log("user already exists")
-    create({ ...user }).then(() => setAlertOpen(true));
-   }
- }
-
-  return (
-    <>
-      <form>
-        <TextField
-          name="fname"
-          label="First Name"
-          fullWidth
-          multiline
-          minRows={5}
-          value={user.fname}
-          onChange={(e) => setUser({ ...user, fname: e.target.value })}
-        ></TextField>
-
-        <TextField
-          name="lname"
-          label="Last Name"
-          fullWidth
-          multiline
-          minRows={5}
-          value={user.lname}
-          onChange={(e) => setUser({ ...user, lname: e.target.value })}
-        ></TextField>
-
-        <TextField
-          name="email"
-          label="email"
-          fullWidth
-          multiline
-          minRows={5}
-          value={user.email}
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
-        ></TextField>
-
-        <Button
-          startIcon={<SaveIcon />}
-          variant="contained"
-          color="primary"
-          onClick={() => onSave({ ...user })}
-        >
-          Spara
-        </Button>
-      </form>
+          </div>
       
+        <Typography variant="h5" component="h3">
+          {/* {product.reviews && <ReviewList reviews={product.reviews}></ReviewList >} */}
+        {<Link to={`/UsersEdit/${userId}`}> {"Edit user"} </Link>}
+        </Typography>
+        </ul>  
     </>
+  ) : (
+    <Typography>User is missing</Typography>
   );
-} 
+}
 
 export default Users;

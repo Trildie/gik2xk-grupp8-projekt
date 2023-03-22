@@ -89,3 +89,9 @@ export async function addReview(id, review) {
     return {};
   }
 }
+
+
+export async function addProductToCart({product}, userId, ammount){
+  console.log(product.id, userId, ammount);
+  return{};
+}

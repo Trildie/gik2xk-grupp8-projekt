@@ -1,21 +1,24 @@
-import ReviewItemSmall from "./ReviewItemSmall";
+import { Rating, Typography } from "@mui/material";
 
-function Review({reviews}) {
+function Review({review}) {
     
-    return ( 
-    <ul>
-        {reviews &&
-          reviews.map((review) => {
-            
-            return (
-              <li key={`productId_${review.id}`}>
-                {/* <ReviewItemSmall review={review.userId} /> */}
-                <ReviewItemSmall review={review} />
-              </li>
-            );
-            
-          })}
-      </ul> );
+    return (
+    <>
+     
+      <div>
+        <Typography variant="h5" component="h3"></Typography>
+        <Typography> {review.summary}</Typography>
+        <Typography variant="h5" component="h3">
+          <Rating
+            name="half-rating-read"
+            defaultValue={review.rating}
+            precision={0.5}
+            readOnly
+          />
+        </Typography>
+      </div>
+    </>
+  );
 }
 
 export default Review;

@@ -1,9 +1,10 @@
 import { Alert, Button, Rating, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
+
 import SaveIcon from "@mui/icons-material/Save";
 import { useState } from "react";
-/* import { create } from "../models/productModel"; */
-import { addReview } from "../models/productModel";
+import { Link} from 'react-router-dom';
+import ProductDetail from "../views/ProductDetail";
+
 
   
 /*   function onSave() {
@@ -14,7 +15,6 @@ import { addReview } from "../models/productModel";
 
 function ReviewForm({onSave}) {
   const [review, setReview] = useState({ summary: "", rating: 0 });
-  const [alertOpen, setAlertOpen] = useState(false);
 
 
   return (
@@ -40,14 +40,18 @@ function ReviewForm({onSave}) {
           })
         }
       />
+
+      <Link to={`/productDetail/${5}`}>
       <Button
         startIcon={<SaveIcon />}
         onClick={() => onSave({ ...review, userId: 1 })}
         variant="contained"
         color="primary"
+        key={``}
       >
-        Spara
-      </Button>
+        Add review
+         
+      </Button></Link>
     </form>
   );
 }

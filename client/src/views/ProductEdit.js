@@ -36,7 +36,8 @@ function ProductEdit() {
   function onSave(product) {
   /*   product.id = productId; */
     if (product.id=== 0) {
-        console.log("something went werry wrong!");
+        console.log("new product created");
+        create({ ...product }).then(() => setAlertOpen(true));
     } else {
     console.log("uppdated product");
      update({ ...product }).then(() => setAlertOpen(true));
@@ -51,7 +52,7 @@ function ProductEdit() {
         remove({ ...product.id }).then(() => setAlertOpen(true));
     } */
     console.log(product.id);
-  remove(product).then(() => navigate('/',{state: {message:"product removed"}} ));
+  remove(product).then(() => navigate('/products',{state: {message:"product removed"}} ));
   }
 
 
