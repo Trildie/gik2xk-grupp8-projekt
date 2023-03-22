@@ -92,6 +92,8 @@ export async function addReview(id, review) {
 
 
 export async function addProductToCart({product}, userId, ammount){
-  console.log(product.id, userId, ammount);
+  console.log("product.id, userId, ammount");
+  const temp = "monster Hunter World "
+  const productT = await api.put(`/carts/${1}`, temp);
   return{};
 }

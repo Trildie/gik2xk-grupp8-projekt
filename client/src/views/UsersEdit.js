@@ -12,7 +12,7 @@ import { create } from "../models/userModel";
 
 
 
-function Users() {
+function UsersEdit() {
 
   const [user, setUser] = useState({ fname: "", lname: "", email: "" });
   const [alertOpen, setAlertOpen] = useState(false);
@@ -37,7 +37,7 @@ function Users() {
           fullWidth
           multiline
           minRows={5}
-          value={user.fname}
+          value={user.f_name}
           onChange={(e) => setUser({ ...user, f_name: e.target.value })}
         ></TextField>
 
@@ -47,7 +47,7 @@ function Users() {
           fullWidth
           multiline
           minRows={5}
-          value={user.lname}
+          value={user.l_name}
           onChange={(e) => setUser({ ...user, l_name: e.target.value })}
         ></TextField>
 
@@ -75,4 +75,4 @@ function Users() {
   );
 } 
 
-export default Users;
+export default UsersEdit;

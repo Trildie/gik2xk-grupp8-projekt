@@ -21,6 +21,18 @@ async function getProductById(productId) {
     return createResponseError(error.status, error.message);
   }
 }
+async function getReviewById(reviewId) {
+  try {
+    const review = await db.review.findOne({ where: { id: reviewId },
+       include: [ db.user] });
+    //return createResponseSuccess(_formatProduct(product));
+    return createResponseSuccess(
+     review
+    );
+  } catch (error) {
+    return createResponseError(error.status, error.message);
+  }
+}
 
 //Tar imot ett userID, väntar och hittar användaren med det ID.
 //
@@ -45,6 +57,19 @@ async function getByUser(userId) {
     });
     /* return createResponseSuccess(cart); */
     return createResponseSuccess(_formatCart(cart));
+  } catch (error) {
+    return createResponseError(error.status, error.message);
+  }
+}
+
+async function getReviewByUser(userId) {
+  try {
+    const review = await db.review.findAll({
+      where: { userId },
+      include: [db.user, db.product],
+    });
+    /* return createResponseSuccess(cart); */
+    return createResponseSuccess(review);
   } catch (error) {
     return createResponseError(error.status, error.message);
   }
@@ -268,6 +293,7 @@ async function destroyUser(id) {
 }
 
 async function destroyReview(id) {
+  
   if (!id) {
     return createResponseError(422, "Id does not exist.");
   }
@@ -388,6 +414,8 @@ module.exports = {
   getProductById,
   getByUserID,
   getByUser,
+  getReviewByUser,
+  getReviewById,
   getById,
   getAllProducts,
   getAllUsers,

@@ -22,6 +22,30 @@ export async function getByUserID(id) {
     return [];
   }
 }
+
+export async function getReviewByUserID(id) {
+  const result = await api.get(`/users/${id}/reviews`);
+ 
+  if (result.status === 200) return result.data;
+  
+  else {
+    console.log(result.status);
+    console.log(result.data);
+    return [];
+  }
+}
+
+export async function getReviewById(id) {
+  const result = await api.get(`/users/${id}/review`);
+ 
+  if (result.status === 200) return result.data;
+  
+  else {
+    console.log(result.status);
+    console.log(result.data);
+    return [];
+  }
+}
 export async function create(user) {
   const result = await api.post("/users/", user);
 
@@ -32,6 +56,20 @@ export async function create(user) {
     return {};
   }
 }
+
+
+  
+export async function updateReview(review) {
+  const result = await api.put(`/users/${review.id}/review` , review.id);
+
+  if (result.status === 200) return result.data;
+  else {
+    console.log(result.status);
+    console.log(result.data);
+    return {};
+  }
+}
+
 export async function update(id, user) {
   const result = await api.put(`/users/${id}`, user);
 
@@ -42,3 +80,20 @@ export async function update(id, user) {
     return {};
   }
 }
+ export async function remove(review) {
+    
+    console.log(review.id);
+    const result = await api.delete(`/users/${review.id}/destroyReview`, review.id);
+ 
+    if (result.status === 200) {
+      console.log("error here?");
+      return result.data;
+     
+    }
+    else {
+      console.log(result.status);
+      console.log(result.data);
+      return {};
+    }
+  }
+

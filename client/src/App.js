@@ -10,13 +10,13 @@ import { Routes, Route, Link } from 'react-router-dom';
 
 
 import Home from './views/Home';
-import Cart from './views/Cart';
+import CartMain from './views/CartMain';
 import Products from './views/Products';
 import ProductDetail from './views/ProductDetail';
 import ProductEdit from './views/ProductEdit';
 import Users from './views/Users';
 import UsersEdit from './views/UsersEdit';
-
+import ReviewEdit from './views/ReviewEdit';
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
             </Typography>
 
             <Typography variant="h6" component="div" sx={{ flexGrow: 0 }}>
-              <Link to="/users/3">User</Link>
+              <Link to="/users/1">User</Link>
               <SportsEsportsIcon />
             </Typography>
 
@@ -63,14 +63,15 @@ function App() {
       <div>
         <Routes>
           <Route exact path="/" element={<Home></Home>}> </Route>
-          <Route exact path="/cart" element={<Cart></Cart>}></Route>
+          <Route exact path="/cart" element={<CartMain></CartMain>}></Route>
           <Route exact path="/products" element={<Products></Products>}></Route>
           <Route exact path="/Users/:id" element={<Users></Users>}> </Route>
           <Route exact path="/productDetail/:id" element={<ProductDetail/>} ></Route>
           <Route exact path="/productDetail/new" element={<ProductDetail/>} ></Route>
           <Route exact path="/productDetail/:id/edit" element={<ProductEdit/>} ></Route>
           <Route exact path="/productEdit/:id" element={<ProductEdit />} ></Route>
-          <Route exact path="/UsersEdit/:id" element={<UsersEdit/>} ></Route>
+          <Route exact path="/UsersEdit/:id" element={<UsersEdit />} ></Route>
+          <Route exact path="/ReviewEdit/:id" element={<ReviewEdit/>} ></Route>
         </Routes>
       </div>
     </div>

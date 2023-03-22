@@ -64,6 +64,21 @@ router.get("/:id/carts", (req, res) => {
   });
 });
 
+router.get("/:id/reviews", (req, res) => {
+  const  id= req.params.id;
+
+  productServices.getReviewByUser(id).then((result) => {
+    res.status(result.status).json(result.data);
+  });
+});
+
+router.get("/:id/review", (req, res) => {
+  const  id= req.params.id;
+
+  productServices.getReviewById(id).then((result) => {
+    res.status(result.status).json(result.data);
+  });
+});
 //check  get en viss users via id
 router.get("/:id", (req, res)=>{
   const id = req.params.id;
@@ -96,6 +111,8 @@ router.put("/:id", (req, res)=>{
 
 });
 
+
+
 router.put("/:id/review",(req,res)=>{
   const id = req.params.id;
   const review = req.body
@@ -105,10 +122,10 @@ router.put("/:id/review",(req,res)=>{
 });
 
 router.delete("/:id/destroyReview", (req, res) => {
-  const rId= req.params.id;
+  const id= req.params.id;
  
   
-  productServices.destroyReview(rId).then((result) => {
+  productServices.destroyReview(id).then((result) => {
     res.status(result.status).json(result.data);
   })
 })

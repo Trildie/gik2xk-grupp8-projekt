@@ -41,7 +41,7 @@ function ReviewForm({onSave}) {
         }
       />
 
-      <Link to={`/productDetail/${5}`}>
+     
       <Button
         startIcon={<SaveIcon />}
         onClick={() => onSave({ ...review, userId: 1 })}
@@ -51,7 +51,7 @@ function ReviewForm({onSave}) {
       >
         Add review
          
-      </Button></Link>
+      </Button>
     </form>
   );
 }
