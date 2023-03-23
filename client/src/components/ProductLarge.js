@@ -1,22 +1,25 @@
-import { Typography, Button } from "@mui/material";
+import { Alert, Typography, Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { getProductsById, addProductToCart } from "../models/productModel";
+import {  Link } from "react-router-dom";
+import { getProductsById, updateCart } from "../models/productModel";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import TextField from '@mui/material/TextField';
 
 function ProductLarge({ product }) {
-  /*     console.log("HEJ");
-    const [products, setProducts] = useState([]);
-    console.log(products);
-    useEffect(() => {
-      getProductsById(pathname).then((products) => setProducts(products));
-    }, [pathname]);
-    console.log(products);
- */
+
+ 
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [cart, setCart] = useState({ ammount: (0), units: (0),userId:(1), products: ([]), });
+  const [ammount, setAmmount] = useState({productUnits: "", ammount:0});
+  const userId = 1;
+  const cartId=1
+  const prodTitle = product.tile;
+  function onUpdate() {
+    cart.products.push(product);
     
-    const [ammount, setAmmount] = useState({productUnits: "", ammount:0});
-    const userId = 3;
+    updateCart(cart, cartId).then(() => { console.log(cart); setAlertOpen(true)});
+   
+ }
 
   return product ? (
     <>
@@ -52,7 +55,7 @@ function ProductLarge({ product }) {
               <Button
               size="large"
               startIcon={<AddShoppingCartIcon />}
-              onClick={() => addProductToCart({ product, userId , ammount})}
+              onClick={() => onUpdate({ ...cart})}
               variant="contained"
               color="primary"
               key={``}

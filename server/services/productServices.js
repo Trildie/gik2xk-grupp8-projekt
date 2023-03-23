@@ -241,23 +241,22 @@ async function updateReview(id, review) {
 
 //check!
 async function updateCart(id, cart) {
-  /*  const invalidData = validate(cart, constraints);
-  if (!id) {
-    return createResponseError(422, "Id is obligatory.");
-  }
-  if (invalidData) {
-    return createResponseError(422, invalidData);
-  } */
+  
+  //Denna behöver en cart och ett ID, cart ID
+  //cart är den nya cart? som har ny product????????????????
+  console.log(id);
   try {
     const existingCart = await db.cart.findOne({ where: { id } });
     if (!existingCart) {
       return createResponseError(404, "Found no cart to update.");
     }
     //await _addTagToPost(existingProduct, post.tags);
+   
     await _addProductToCart(existingCart, cart.products);
+    
     await db.cart.update(cart, { where: { id } }); //funkar inte dubbelkolla detta
     
- 
+    
     return createResponseMessage(200, "Cart has been updated.");
   } catch (error) {
     return createResponseError(error.status, error.message);
@@ -390,9 +389,9 @@ function _formatUser(user) {
   }
   return cleanUser;
 }
-async function _findOrCreateproductId(title) {
+async function _findOrCreateproductId(id) {
  
-  const foundOrCreatedProduct = await db.product.findOrCreate({ where: { title} });
+  const foundOrCreatedProduct = await db.product.findOrCreate({ where: { id} });
 
   return foundOrCreatedProduct[0].id;
 }
@@ -402,7 +401,8 @@ async function _addProductToCart(cart, products) {
 
   if (products) {
     products.forEach(async (product) => {
-      const productId = await _findOrCreateproductId(product);
+      console.log("1")
+      const productId = await _findOrCreateproductId(product.id);
       await cart.addProduct(productId);
     });
   }

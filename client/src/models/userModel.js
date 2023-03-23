@@ -53,14 +53,12 @@ export async function create(user) {
   else {
     console.log(result.status);
     console.log(result.data);
-    return {};
-  }
+}
 }
 
-
   
-export async function updateReview(review) {
-  const result = await api.put(`/users/${review.id}/review` , review.id);
+export async function updateReview(review, id) {
+  const result = await api.put(`/users/${id}/review` , review);
 
   if (result.status === 200) return result.data;
   else {
@@ -70,8 +68,9 @@ export async function updateReview(review) {
   }
 }
 
-export async function update(id, user) {
-  const result = await api.put(`/users/${id}`, user);
+export async function update(user) {
+  console.log(user);
+  const result = await api.put(`/users/${user.id}`, user);
 
   if (result.status === 200) return result.data;
   else {

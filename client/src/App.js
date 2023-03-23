@@ -3,6 +3,7 @@ import { Box, AppBar, Toolbar, Typography, Button, IconButton } from "@mui/mater
 
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import PersonIcon from '@mui/icons-material/Person';
 import HouseIcon from "@mui/icons-material/House";
 
 import { Routes, Route, Link } from 'react-router-dom';
@@ -33,7 +34,7 @@ function App() {
               aria-label="menu"
               sx={{ mr: 2 }}
             >
-              <Link to="/">
+              <Link  to="/">
                 <HouseIcon />
               </Link>
             </IconButton>
@@ -45,8 +46,8 @@ function App() {
             </Typography>
 
             <Typography variant="h6" component="div" sx={{ flexGrow: 0 }}>
-              <Link to="/users/1">User</Link>
-              <SportsEsportsIcon />
+              <Link to="/users/1" color="primary">User</Link>
+              <PersonIcon/>
             </Typography>
 
             <Button color="inherit">

@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import {Alert, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -10,7 +10,8 @@ import { updateReview, getReviewById } from "../models/userModel";
 function ReviewEdit() {
     const params = useParams();
     const reviewId = params.id;
-    const [setAlertOpen] = useState(false);
+    const [alertOpen, setAlertOpen] = useState(false);
+    
      const [ review, setReview] = useState(false);
  useEffect(() => {
     getReviewById(reviewId).then((review) => setReview(review));
@@ -18,7 +19,7 @@ function ReviewEdit() {
     
     function reviewUpdate(review) {
     
-        updateReview({ ...review }).then(() => setAlertOpen(true));
+        updateReview( review, reviewId ).then(() => setAlertOpen(true));
     }
    
        

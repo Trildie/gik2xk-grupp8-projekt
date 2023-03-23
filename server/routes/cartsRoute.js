@@ -54,6 +54,10 @@ router.put("/", (req, res) => {
     });
 });
 
+
+
+//Vi behöver nu 1! object REQ in, som ska bestå av objectet cart... som måste innehålla product?????
+//Skicka vidare cartID  och cart dvs den NYA cart vi har 1! produkt i för att sparas in i en existerande cart...
 router.put("/:id", (req, res)=>{
   const id = req.params.id;
   const cart = req.body

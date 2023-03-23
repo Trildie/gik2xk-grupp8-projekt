@@ -91,9 +91,46 @@ export async function addReview(id, review) {
 }
 
 
-export async function addProductToCart({product}, userId, ammount){
-  console.log("product.id, userId, ammount");
-  const temp = "monster Hunter World "
-  const productT = await api.put(`/carts/${1}`, temp);
-  return{};
-}
+
+export async function updateCart(cart, id) {
+    
+  
+    /*  const test = {id:1,units:2,total_amount:600,user:{
+     id: 1,
+      email: "tokvi@du.se",
+      f_name: "Thomas",
+      l_name: "Kvist"},
+      products:[
+        {
+          id: 1,
+          title: "monster Hunter World ",
+          description: "sahudhasfhaf afgasfsaf",
+          price: 300,
+          productImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXc9DMETl9AlCTuR4di8yrLzek7Vi9o98SwA&usqp=CAU",
+          createdAt: "2023-03-22T12:02:24.000Z",
+          updatedAt: "2023-03-22T12:02:24.000Z",
+      },
+      {
+          id: 2,
+          title: "Space hunter",
+          description: "sahudhasfhaf afgasfsaf",
+          price: 300,
+          productImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXc9DMETl9AlCTuR4di8yrLzek7Vi9o98SwA&usqp=CAU",
+          createdAt: "2023-03-22T12:02:24.000Z",
+          updatedAt: "2023-03-22T12:02:24.000Z",
+      }
+      ]
+    }; */
+
+    const result = await api.put(`/carts/${id}`, cart);
+    /* const result = await api.put(`/cart/${cart.id}`, cart); */
+
+
+    if (result.status === 200) return result.data;
+    else {
+      console.log(result.status);
+      console.log(result.data);
+      return {};
+    }
+  }
+
