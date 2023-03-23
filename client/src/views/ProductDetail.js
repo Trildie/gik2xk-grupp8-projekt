@@ -57,12 +57,7 @@ function ProductDetail() {
         >
           <Typography variant="h4" component="h4">
             Reviews
-            <Rating
-              name="half-rating-read"
-              defaultValue={2.5}
-              precision={0.5}
-              readOnly
-            />
+            
           </Typography>
 
           {product.reviews && <ReviewList reviews={product.reviews}></ReviewList >}

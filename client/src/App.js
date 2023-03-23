@@ -20,6 +20,7 @@ import UsersEdit from './views/UsersEdit';
 import ReviewEdit from './views/ReviewEdit';
 
 function App() {
+
   return (
     <div className="App">
       <h1>Eshop </h1>
@@ -41,7 +42,7 @@ function App() {
 
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <SportsEsportsIcon />
-              <Link to="/products">Games</Link>
+              <Link to="/products" >Games</Link>
               <SportsEsportsIcon />
             </Typography>
 

@@ -12,12 +12,14 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
       mode: "light",
       primary: {
         main: "#263238",
-      },
-      secondary: {
-        main: "#3e2723",
         contrastText: "#ffd600",
       },
-    },
+      secondary: {
+        main: "#95acc9",
+        contrastText: "#ffd600",
+      },
+    }, 
+    
   });
 
 root.render(

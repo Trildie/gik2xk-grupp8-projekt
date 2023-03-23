@@ -1,6 +1,10 @@
 import { List, Rating } from '@mui/material';
 import Review from './Review';
 
+function score(newScore){
+  t = newScore;
+}
+let t = 4;
 
 function ReviewList({ reviews }) {
   let totScore = 0;
@@ -12,7 +16,7 @@ function ReviewList({ reviews }) {
         <Rating
         name="half-rating-read"
           defaultValue={2.5}
-        
+          value={t}
           precision={0.1}
         readOnly
         />
@@ -32,7 +36,8 @@ function ReviewList({ reviews }) {
                 );
                 
               })}
-            {console.log(totScore/g)}
+            {score(totScore/g)}
+            
           </List> 
       </>);
 }

@@ -121,8 +121,9 @@ export async function updateCart(cart, id) {
       }
       ]
     }; */
-
-    const result = await api.put(`/carts/${id}`, cart);
+    
+  const result = await api.put(`/carts/${id}`, cart);
+  
     /* const result = await api.put(`/cart/${cart.id}`, cart); */
 
 

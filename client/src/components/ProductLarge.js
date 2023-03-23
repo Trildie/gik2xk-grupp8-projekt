@@ -58,7 +58,7 @@ function ProductLarge({ product }) {
               onClick={() => onUpdate({ ...cart})}
               variant="contained"
               color="primary"
-              key={``}
+             /*  key={``} */
               >
               Add to cart
               </Button>

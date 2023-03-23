@@ -1,10 +1,9 @@
 .App {
   text-align: center;
-
 }
-.Link a:visited{
- color: #fff;;
-  
-  
-}
+a:visited {
+    color:#7b9fb0;
+    
+  }
 
+  

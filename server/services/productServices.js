@@ -244,7 +244,7 @@ async function updateCart(id, cart) {
   
   //Denna behöver en cart och ett ID, cart ID
   //cart är den nya cart? som har ny product????????????????
-  console.log(id);
+  
   try {
     const existingCart = await db.cart.findOne({ where: { id } });
     if (!existingCart) {
@@ -334,6 +334,7 @@ function _formatProduct(product) {
 }
 
 function _formatCart(cart) {
+  
   const cleanCart = {
     id: cart.id,
     units: cart.units,
@@ -345,7 +346,8 @@ function _formatCart(cart) {
       email: cart.user.email,
       f_name: cart.user.f_name,
       l_name: cart.user.l_name,
-    }, products: []
+    }, products: [],
+   
   /*   product:{
       productId: product.id,
       title: cart.product.title,
@@ -356,12 +358,12 @@ function _formatCart(cart) {
   };
   if (cart.products) {
     cart.products.map((product) => {
-      return (cleanCart.products = [product.title, product.price, ...cleanCart.products]);
+      return (cleanCart.products = [{id: product.id, title: product.title, description: product.description, productImg: product.productImg, price: product.price, ...cleanCart.products}]);
     });
     return cleanCart;
   }
 }
-  
+  //la till id:product.id   samma med description 
 
 
 function _formatUser(user) {
@@ -397,17 +399,25 @@ async function _findOrCreateproductId(id) {
 }
 
 async function _addProductToCart(cart, products) {
-  await db.cartRow.destroy({ where: { cartId: cart.id } });
-
+ 
+  /*   const incrementResult = await cartRow.increment('age', { by: 2 }); */
+  /*  if (products === null) { */
+  /*  await db.cartRow.destroy({ where: { cartId: cart.id } }); */
+  /*}  else {
+    
+    await db.cartRow.update({ where: { cartId: cart.id } });
+    await db.cartRow.save({ where: { cartId: cart.id } });
+    
+  } */
+ 
+  
   if (products) {
     products.forEach(async (product) => {
-      console.log("1")
       const productId = await _findOrCreateproductId(product.id);
       await cart.addProduct(productId);
     });
   }
 }
-
 
 //uppdatera så dessa stämmer ;D gjort!
 module.exports = {

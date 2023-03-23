@@ -25,7 +25,7 @@ function Cart() {
             createdAt: "2023-03-22T12:02:24.000Z",
             updatedAt: "2023-03-22T12:02:24.000Z",
         },
-        {
+/*         {
             id: 2,
             title: "Space hunter",
             description: "sahudhasfhaf afgasfsaf",
@@ -33,34 +33,40 @@ function Cart() {
             productImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXc9DMETl9AlCTuR4di8yrLzek7Vi9o98SwA&usqp=CAU",
             createdAt: "2023-03-22T12:02:24.000Z",
             updatedAt: "2023-03-22T12:02:24.000Z",
-        },
+        }, */
     ]
     }
-
+   
     const [cart, setCart] = useState({});
     useEffect(() => {
         getCartById(1).then((cart) => setCart(cart));
     }, [1]);
     
-    console.log(cart);
+    
 
     return ( 
 
         <>
             
             <Box border={5} >
-                <ul>           
+                <ul>          
+                    
                     {cart.products &&
-                        cart.products.map((product, i) => {
+                        cart.products.map((product) => {
                             cart.total_amount += product.price
-                        return (
-                            <li key={`productId_${product.id}`}>
-                            ProductImg: <img
+                            
+                            return (
+                            
+                                <li key={`productId_${product.id}`}>
+                                     <img
                                         heigh="100"
                                         width="100"
                                         src={product.productImg}
                                         alt="bild på spel"
-                                        />
+                                    /> <br></br>
+                                    Title: {product.title}  
+                                    
+                                    <br></br>
                             Price: {product.price}kr
                             </li>
                         );

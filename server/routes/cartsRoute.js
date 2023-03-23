@@ -62,7 +62,7 @@ router.put("/:id", (req, res)=>{
   const id = req.params.id;
   const cart = req.body
   productServices.updateCart(id, cart).then((result) => {
-    res.status(result.status).json(result.data);
+    res.json(result.data);
   });
 
 });
