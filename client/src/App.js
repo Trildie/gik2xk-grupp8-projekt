@@ -23,10 +23,10 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Eshop </h1>
+      <h1>Eshop</h1>
 
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <IconButton
               size="large"

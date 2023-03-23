@@ -1,6 +1,7 @@
 
 import { Link } from 'react-router-dom';
 import {
+  Box,
   Typography
 } from '@mui/material';
 
@@ -9,16 +10,17 @@ import {
 function ProductSmall({product}) {
   return (
     <>
-    {   <div>
+      {<Box
+        >
         <img heigh="200" width="500" src={product.productImg} alt="cover for the game"/>
-      </div>
+      </Box>
  }
       <div>
         <Typography variant="h5" component="h3">
           <Link to={`/productDetail/${product.id}`}>{product.title}</Link>
         </Typography>
         <Typography> {product.description}</Typography>
-        <Typography variant="h5" component="h3">
+        <Typography variant="h5" component="h3"sx={{ marginTop: '2rem' }}>
           Price: {product.price}kr
         </Typography>
       </div>

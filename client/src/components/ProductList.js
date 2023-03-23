@@ -20,8 +20,8 @@ function ProductList({ pathname }) {
       {products &&
         products.map((product) => {
             return (
-              <li key={`productId_${product.id}`}>
-                <ProductSmall product={product} />
+              <li key={`productId_${product.id}`} >
+                <ProductSmall product={product}  />
               </li>
             );
           })}

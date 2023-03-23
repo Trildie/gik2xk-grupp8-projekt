@@ -1,4 +1,4 @@
-import { Alert, Typography, Button } from "@mui/material";
+import { Alert, Typography, Button, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import {  Link } from "react-router-dom";
 import { getProductsById, updateCart } from "../models/productModel";
@@ -50,7 +50,7 @@ function ProductLarge({ product }) {
             </Typography>
 
 
-            <Typography variant="h5" component="h3">
+            <Box variant="h5" component="h3">
               
               <Button
               size="large"
@@ -76,7 +76,7 @@ function ProductLarge({ product }) {
                 shrink: true,
               }}/>
 
-            </Typography>
+            </Box>
 
             
 

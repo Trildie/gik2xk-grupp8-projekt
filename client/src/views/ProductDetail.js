@@ -40,7 +40,9 @@ function ProductDetail() {
         <Box
           className="ProductDetails__grid-item__content"
           border={2}
-          borderBottom={1}
+          borderTop={1}
+          borderRadius={5}
+          borderColor="gray"s
         >
           <Typography variant="h4" component="h2">
             ReviewForm
@@ -54,6 +56,9 @@ function ProductDetail() {
           className="ProductDetails__grid-item__content"
           border={2}
           borderTop={1}
+          borderColor="gray"
+          borderRadius={5}
+          margin_top= '2rem' 
         >
           <Typography variant="h4" component="h4">
             Reviews
