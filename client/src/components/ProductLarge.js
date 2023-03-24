@@ -15,7 +15,7 @@ function ProductLarge({ product }) {
  
   const cartId=1
   function updateUnits() {
-/*   product.units = ; */
+
     
     update(product, product.id).then(() => { console.log(product);  setAlertOpen(true)});
 }
@@ -70,7 +70,7 @@ function ProductLarge({ product }) {
               >
               Add to cart
               </Button>
-
+{/* 
               <TextField
               name="productUnits"
               size="small"
@@ -82,7 +82,7 @@ function ProductLarge({ product }) {
               onChange={(e) => setProduct({ ...product, units: parseInt(e.target.value)})}
               InputLabelProps={{
                 shrink: true,
-              }}/>
+              }}/> */}
               
             </Box>
 

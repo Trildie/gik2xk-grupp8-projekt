@@ -44,7 +44,7 @@ function ProductDetail() {
           borderColor="gray"
         >
           <Typography variant="h4" component="h2">
-            ReviewForm
+            ReviewFormS
           </Typography>
           <ReviewForm onSave={onReviewAdd} ></ReviewForm>
           
