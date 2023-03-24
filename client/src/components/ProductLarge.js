@@ -14,18 +14,32 @@ function ProductLarge({ product }) {
    const [products, setProduct] = useState({ units: (0)});
  
   const cartId=1
-  function updateUnits() {
-
-    
+  function updateUnits() {    
     update(product, product.id).then(() => { console.log(product);  setAlertOpen(true)});
 }
-  function onUpdate() {
+
+//NEW
 
 
-    cart.products.push(product);
-    
-    updateCart(cart, cartId).then(() => { console.log(cart); setAlertOpen(true)});
+  let prodUnits = 0;
+
+
+function onUpdateAmmount() {
    
+    update({ 
+    id: product.id,
+    units: prodUnits,
+  }).then(() => console.log("tillagd"));
+  
+}
+//new
+
+
+  function onUpdate() {
+    
+    onUpdateAmmount();
+    cart.products.push(product);    
+    updateCart(cart, cartId).then(() => { console.log(cart); setAlertOpen(true)});  
  }
 
   return product ? (
@@ -70,19 +84,20 @@ function ProductLarge({ product }) {
               >
               Add to cart
               </Button>
-{/* 
+
               <TextField
               name="productUnits"
               size="small"
               id="outlined-number"
                 label=""
-                InputProps={{ inputProps: { min: 0} }}
+                InputProps={{ inputProps: { min: 1} }}
               type="number"
               value={product.units}
-              onChange={(e) => setProduct({ ...product, units: parseInt(e.target.value)})}
+              onChange={(e)=>prodUnits= parseInt(e.target.value)}
+              /* onChange={(e) => setProduct({ ...product, units: parseInt(e.target.value)})} */
               InputLabelProps={{
                 shrink: true,
-              }}/> */}
+              }}/>
               
             </Box>
 

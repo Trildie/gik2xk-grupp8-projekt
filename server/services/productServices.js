@@ -293,16 +293,13 @@ function _formatCart(cart) {
       email: cart.user.email,
       f_name: cart.user.f_name,
       l_name: cart.user.l_name,
-    }, products: [],
+    }, products: cart.products,
    
 
   };
-  if (cart.products) {
-    cart.products.map((product) => {
-      return (cleanCart.products = [{id: product.id, title: product.title, description: product.description, productImg: product.productImg, price: product.price, ...cleanCart.products}]);
-    });
+  
     return cleanCart;
-  }
+  
 }
 
 
