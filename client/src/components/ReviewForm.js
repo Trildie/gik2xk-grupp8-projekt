@@ -2,15 +2,11 @@ import { Button, Rating, TextField } from "@mui/material";
 
 import SaveIcon from "@mui/icons-material/Save";
 import { useState } from "react";
-import { Link} from 'react-router-dom';
-import ProductDetail from "../views/ProductDetail";
+
 
 
   
-/*   function onSave() {
-    if (product.id === 0) {
-      create
-    } */
+
     
 
 function ReviewForm({onSave}) {
@@ -48,6 +44,7 @@ function ReviewForm({onSave}) {
         variant="contained"
         color="primary"
         key={``}
+        sx={{marginBottom: "1rem"}}
       >
         Add review
          
@@ -58,15 +55,4 @@ function ReviewForm({onSave}) {
 
 export default ReviewForm;
 
-//
 
-{
-  /* <Button
-        startIcon={<SaveIcon />}
-        onClick={() => (onSave = { onReviewAdd })}
-        variant="contained"
-        color="primary"
-      >
-        Spara
-      </Button>*/
-}

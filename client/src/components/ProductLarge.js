@@ -1,7 +1,7 @@
-import { Alert, Typography, Button, Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Typography, Button, Box } from "@mui/material";
+import {  useState } from "react";
 import {  Link } from "react-router-dom";
-import { getProductsById, updateCart } from "../models/productModel";
+import { getProductsById, update, updateCart } from "../models/productModel";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import TextField from '@mui/material/TextField';
 
@@ -9,12 +9,19 @@ function ProductLarge({ product }) {
 
  
   const [alertOpen, setAlertOpen] = useState(false);
-  const [cart, setCart] = useState({ ammount: (0), units: (0),userId:(1), products: ([]), });
-  const [ammount, setAmmount] = useState({productUnits: "", ammount:0});
-  const userId = 1;
+  const [cart, setCart] = useState({  units: (0),userId:(1), products: ([]), });
+ 
+   const [products, setProduct] = useState({ units: (0)});
+ 
   const cartId=1
-  const prodTitle = product.tile;
+  function updateUnits() {
+/*   product.units = ; */
+    
+    update(product, product.id).then(() => { console.log(product);  setAlertOpen(true)});
+}
   function onUpdate() {
+
+
     cart.products.push(product);
     
     updateCart(cart, cartId).then(() => { console.log(cart); setAlertOpen(true)});
@@ -58,7 +65,8 @@ function ProductLarge({ product }) {
               onClick={() => onUpdate({ ...cart})}
               variant="contained"
               color="primary"
-             /*  key={``} */
+             
+                
               >
               Add to cart
               </Button>
@@ -70,12 +78,12 @@ function ProductLarge({ product }) {
                 label=""
                 InputProps={{ inputProps: { min: 0} }}
               type="number"
-              value={ammount.productUnits}
-              onChange={(e) => setAmmount({ ammount, productUnits: e.target.value })}
+              value={product.units}
+              onChange={(e) => setProduct({ ...product, units: parseInt(e.target.value)})}
               InputLabelProps={{
                 shrink: true,
               }}/>
-
+              
             </Box>
 
             

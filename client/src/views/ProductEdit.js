@@ -5,14 +5,12 @@ import SaveIcon from "@mui/icons-material/Save";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {
   create,
-  destroy,
-  destroyProduct,
-  getOne,
+  
   getProductsById,
   remove,
   update,
 } from "../models/productModel";
-import { Link } from "react-router-dom";
+
 
 function ProductEdit() {
   const params = useParams();
@@ -26,6 +24,7 @@ function ProductEdit() {
     description: "",
     price: 0,
     productImg: "",
+    units: 0
   };
   const [product, setProduct] = useState(emptyProduct);
   
@@ -101,6 +100,16 @@ function ProductEdit() {
         value={product.productImg}
         fullWidth
         onChange={(e) => setProduct({ ...product, productImg: e.target.value })}
+      >
+        {" "}
+      </TextField>
+
+      <TextField
+        name="units"
+        label="units"
+        value={product.units}
+        fullWidth
+        onChange={(e) => setProduct({ ...product, units: e.target.value })}
       >
         {" "}
       </TextField>

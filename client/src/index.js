@@ -18,15 +18,18 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
         main: "#95acc9",
         contrastText: "#ffd600",
       },
+      
     }, 
     
   });
+
 
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <App />
+        
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>

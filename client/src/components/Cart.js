@@ -1,10 +1,10 @@
-import {Box, Typography } from "@mui/material";
+import {Box } from "@mui/material";
 import { useEffect, useState } from 'react';
 import { getCartById } from '../models/cartModel'
 
 function Cart() {
    
-    const cartTest = {
+   /*  const cartTest = {
         id: 1,
         units: 4,
         total_amount: 0,
@@ -25,22 +25,14 @@ function Cart() {
             createdAt: "2023-03-22T12:02:24.000Z",
             updatedAt: "2023-03-22T12:02:24.000Z",
         },
-/*         {
-            id: 2,
-            title: "Space hunter",
-            description: "sahudhasfhaf afgasfsaf",
-            price: 300,
-            productImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXc9DMETl9AlCTuR4di8yrLzek7Vi9o98SwA&usqp=CAU",
-            createdAt: "2023-03-22T12:02:24.000Z",
-            updatedAt: "2023-03-22T12:02:24.000Z",
-        }, */
+
     ]
-    }
+    } */
    
     const [cart, setCart] = useState({});
     useEffect(() => {
         getCartById(1).then((cart) => setCart(cart));
-    }, [1]);
+    });
     
     
 
@@ -48,7 +40,7 @@ function Cart() {
 
         <>
             
-            <Box border={5} >
+            <Box border={5} borderColor="gray">
                 <ul>          
                     
                     {cart.products &&
@@ -67,6 +59,8 @@ function Cart() {
                                     Title: {product.title}  
                                     
                                     <br></br>
+                             Units: {product.units}
+                             <br></br>
                             Price: {product.price}kr
                             </li>
                         );

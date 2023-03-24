@@ -27,8 +27,12 @@ module.exports = (sequelize, DataTypes) => {
           validate: {
             isUrl: true
           }
-      
-        }
+        },
+         units: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+
 
       },
       { underscored: true }

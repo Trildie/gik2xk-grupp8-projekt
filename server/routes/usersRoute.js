@@ -39,21 +39,7 @@ router.get("/", (req, res) => {
     res.status(result.status).json(result.data);
   });
 });
-/* 
-router.get("/", (req, res) => {
-  db.user.findAll().then((result) => {
 
-    res.send(result);
-  });
-}); */
-
-/* router.get("/cart/", (req, res) => {
-  db.user.findAll().then((result) => {
-    res.send("Get users");
-    res.send(result);
-  });
-});
- */
 
 //check  get carts som tillhör en user
 router.get("/:id/carts", (req, res) => {
@@ -96,12 +82,7 @@ router.post("/", (req, res) => {
   });
 });
 
-//check
-/* router.delete("/", (req, res) => {
-  db.user.destroy({ where: { id: req.body.id } }).then((result) => {
-    res.json(`user raderades`);
-  });
-}); */
+
 router.put("/:id", (req, res)=>{
   const id = req.params.id;
   const user = req.body

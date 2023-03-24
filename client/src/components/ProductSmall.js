@@ -19,8 +19,7 @@ function ProductSmall({product}) {
         <Typography variant="h5" component="h3">
           <Link to={`/productDetail/${product.id}`}>{product.title}</Link>
         </Typography>
-        <Typography> {product.description}</Typography>
-        <Typography variant="h5" component="h3"sx={{ marginTop: '2rem' }}>
+        <Typography variant="h5" component="h3"sx={{ marginBottom: '2rem' }}>
           Price: {product.price}kr
         </Typography>
       </div>

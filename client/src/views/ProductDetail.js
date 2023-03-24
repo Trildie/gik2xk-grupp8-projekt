@@ -1,16 +1,15 @@
 import ProductLarge from "../components/ProductLarge";
 import ReviewList from "../components/ReviewList";
 import ReviewForm from "../components/ReviewForm";
-import { Box, Grid, Rating, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import "./ProductDetail.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { addReview, getProductsById } from "../models/productModel";
 
 function ProductDetail() {
   const params = useParams();
   const productId = params.id;
-  const navigate = useNavigate;
  
 
   const [product, setProduct] = useState({});
@@ -42,7 +41,7 @@ function ProductDetail() {
           border={2}
           borderTop={1}
           borderRadius={5}
-          borderColor="gray"s
+          borderColor="gray"
         >
           <Typography variant="h4" component="h2">
             ReviewForm

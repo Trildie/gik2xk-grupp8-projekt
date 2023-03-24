@@ -38,15 +38,6 @@ router.get("/:id", (req, res) => {
 
 
 //check
-/* router.post("/", (req, res) => {
-  const product = req.body;
-  productServices.createProduct(product).then((result) => {
-    
-
-    
-    res.status(result.status).json(result.data);
-  });
-}); */
 
 //check skapar product
 router.post("/", (req, res) => {
@@ -90,21 +81,6 @@ router.put("/:id", (req, res)=>{
 
 });
 
-/* router.put("/", (req, res) => {
-  const product = req.body;
- 
-  const id = product.id;
-    
-        db.product
-        .update(product, {
-            where: {id: product.id }
-        })
-        .then((result) => {
-            res.send(result);
-        });
-    }); */
-
-//check
 
 router.delete("/:id", (req, res)=>{
   const id = req.params.id;
@@ -113,10 +89,5 @@ router.delete("/:id", (req, res)=>{
   });
 
 });
-/* router.delete("/", (req, res) => {
-  db.product.destroy({where: {id: req.body.id }}).then((result) => {
-    res.json(`Product raderades`);
-  });
-});
- */
+
 module.exports = router;

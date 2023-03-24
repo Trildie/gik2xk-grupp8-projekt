@@ -1,15 +1,15 @@
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Review from "../components/Review";
 import { getReviewByUserID, remove } from "../models/userModel";
 import { getByUserID } from "../models/userModel";
 
 
-function Users({ }) {
-  const params= useParams;
+function Users() {
+
   const [user, setUser] = useState([]);
   const [reviews, setReview] = useState([]);
   const userId = 1;
@@ -23,19 +23,8 @@ function Users({ }) {
    getReviewByUserID(userId).then((review) => setReview(review));
    }, [userId]);
   
- /*  function onupdate(product) {
-  console.log(product.id);
-  remove(product).then(() => navigate('/products',{state: {message:"product removed"}} )); */
-  /*   product.id = productId; */
-   /*  if (product.id=== 0) {
-        console.log("new product created");
-        create({ ...product }).then(() => setAlertOpen(true));
-    } else {
-    console.log("uppdated product");
-     update({ ...product }).then(() => setAlertOpen(true));
-    }
-  } */
 
+  
   function onDelete(review){ 
   
      console.log(review.id);
@@ -60,7 +49,7 @@ function Users({ }) {
             </Typography>
 
 
-          <Typography variant="h5" component="h3">
+          <Box variant="h5" component="h3">
             {reviews &&
         reviews.map((review) => {
             return (
@@ -76,7 +65,7 @@ function Users({ }) {
         })}
             
             
-      </Typography>
+      </Box>
 
           </div>
       
@@ -93,7 +82,7 @@ function Users({ }) {
     </>
   ) : (
       <Typography>User is missing
-
+        
         <EditIcon >{<Link to={`/UsersEdit/${userId}`}> {"Edit user"} </Link>} </EditIcon>
         
       </Typography>

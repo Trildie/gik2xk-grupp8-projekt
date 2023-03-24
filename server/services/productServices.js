@@ -1,5 +1,5 @@
 const db = require("../models");
-const validate = require("validate.js");
+
 
 const {
   createResponseSuccess,
@@ -34,19 +34,6 @@ async function getReviewById(reviewId) {
   }
 }
 
-//Tar imot ett userID, väntar och hittar användaren med det ID.
-//
-/* async function getByUser(userId) {
-  try {
-    const user = await db.user.findOne({ where: { id: userId }});
-    const allCarts= await user.getCarts({include: [
-      db.cart
-      ]});
-    return createResponseSuccess(allCarts.map((cart)=> _formatCart(cart)));
-  } catch (error) {
-    return createResponseError(error.status, error.message);
-  }
-} */
 
 //Hämtar cart och dess produkter via user id.
 async function getByUser(userId) {
@@ -139,10 +126,7 @@ async function addReview(id, review) {
 }
 
 async function create(cart) {
-/*   const invalidData = validate(post, constraints);
-  if (invalidData) {
-    return createResponseError(422, invalidData);
-  } */
+
   try {
     const newCart = await db.cart.create(cart);
     //post tags är en array av namn
@@ -155,33 +139,9 @@ async function create(cart) {
   }
 }
 
-//används just nu ej
-
-
-/* async function createProduct(product) {
-  const invalidData = validate(product, constraints); 
-  if (invalidData) {
-    return createResponseError(422, invalidData);
-  } else {
-    try {
-      const newProduct = await db.product.create(product);
-      await _addProduct(newProduct);
-      return createResponseSuccess(newProduct);
-    } catch (error) {
-      return createResponseError(error.status, error.message);
-    }
-  }
-} */
-
 //check
 async function updateProduct(id, product) {
-  /*   const invalidData = validate(product, constraints);
-  if (!id) {
-    return createResponseError(422, "Id is obligatory.");
-  }
-  if (invalidData) {
-    return createResponseError(422, invalidData);
-  } */
+
   try {
     const existingProduct = await db.product.findOne({ where: { id } });
     if (!existingProduct) {
@@ -198,13 +158,7 @@ async function updateProduct(id, product) {
 
 //check
 async function updateUser(id, user) {
-  /*   const invalidData = validate(product, constraints);
-    if (!id) {
-      return createResponseError(422, "Id is obligatory.");
-    }
-    if (invalidData) {
-      return createResponseError(422, invalidData);
-    } */
+ 
   try {
     const existingUser = await db.user.findOne({ where: { id } });
     if (!existingUser) {
@@ -219,13 +173,7 @@ async function updateUser(id, user) {
 }
 
 async function updateReview(id, review) {
- /*  const invalidData = validate(review, constraints);
-  if (!id) {
-    return createResponseError(422, "Id is obligatory.");
-  }
-  if (invalidData) {
-    return createResponseError(422, invalidData);
-  } */
+ 
   try {
     const existingProduct = await db.review.findOne({ where: { id } });
     if (!existingProduct) {
@@ -243,8 +191,7 @@ async function updateReview(id, review) {
 async function updateCart(id, cart) {
   
   //Denna behöver en cart och ett ID, cart ID
-  //cart är den nya cart? som har ny product????????????????
-  
+
   try {
     const existingCart = await db.cart.findOne({ where: { id } });
     if (!existingCart) {
@@ -348,13 +295,7 @@ function _formatCart(cart) {
       l_name: cart.user.l_name,
     }, products: [],
    
-  /*   product:{
-      productId: product.id,
-      title: cart.product.title,
-      description: cart.product.description,
-      price: cart.product.price
 
-    } */
   };
   if (cart.products) {
     cart.products.map((product) => {
@@ -363,7 +304,7 @@ function _formatCart(cart) {
     return cleanCart;
   }
 }
-  //la till id:product.id   samma med description 
+
 
 
 function _formatUser(user) {
@@ -399,16 +340,7 @@ async function _findOrCreateproductId(id) {
 }
 
 async function _addProductToCart(cart, products) {
- 
-  /*   const incrementResult = await cartRow.increment('age', { by: 2 }); */
-  /*  if (products === null) { */
-  /*  await db.cartRow.destroy({ where: { cartId: cart.id } }); */
-  /*}  else {
-    
-    await db.cartRow.update({ where: { cartId: cart.id } });
-    await db.cartRow.save({ where: { cartId: cart.id } });
-    
-  } */
+
  
   
   if (products) {
